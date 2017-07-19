@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.densha.kimi.kiminodensha.MainActivity">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/mainLayout"
+    android:onClick="mainClick"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--타이틀-->
+    <ImageView
+        android:id="@+id/titleLogo"
+        android:layout_width="300dip"
+        android:layout_height="100dip"
+        android:layout_marginTop="100dip"
+        android:src="@drawable/logodensha" />
 
+    <!--코멘트-->
+    <!--코멘트 생각하기-->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test2"/>
-
-    <TextView
+        android:id="@+id/titleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test3"/>
+        android:text=
+            "~ 지금 전차를 당신의 손안에 ~"
+        android:textSize="20dip"
+        android:gravity="center"
+        android:layout_marginTop="20dip"/>
 
+    <!--로그인클릭텍스트-->
+    <TextView
+        android:id="@+id/clickTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click for Login"
+        android:textSize="20dip"
+        android:textColor="#A8C8F9"
+        android:layout_marginTop="100dip"
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <!--터치하면 로그인화면으로 전환-->
+</LinearLayout>
+
