@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -20,16 +21,14 @@ import java.net.URL;
 /**
  * Created by haleylovespurple on 7/19/17.
  */
-
 public class LoginActivity extends AppCompatActivity {
-
 
     EditText idInput, passwordInput;    //로그인, 비밀번호
     CheckBox autoLogin;     //자동 로그인 체크박스
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     String loginInfo = "";
-
+    JSONObject json;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +42,21 @@ public class LoginActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
     }
-
 
     public void btnClick(View view){
 
         switch (view.getId()){
-
             case R.id.loginButton:
-
-                if ((!idInput.getText().toString().equals("")) && (!idInput.getText().toString().equals("")))
-                {
-                    loginInfo = "id="+idInput.getText()+"&password="+passwordInput.getText();
+                if ((!idInput.getText().toString().equals("")) && (!idInput.getText().toString().equals(""))) {
+                    Log.d("아이디",idInput.getText().toString());
+                    Log.d("비밀번호",passwordInput.getText().toString());
+                    try{
+                        json=new JSONObject("{'id':"+idInput.getText().toString()+",'password':"+passwordInput.getText().toString()+"}");
+                    }catch (JSONException e){
+                        Log.d("json","error");
+                    }
+                    loginInfo = json.toString();
                     Log.d("login", loginInfo);
                 }
 
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
 
                 try{
-                    url = new URL("http://10.10.8.143:8888/densha/loginAndroid");
+                    url = new URL("http://10.10.1.143:8888/densha/loginandroid");
                 }catch(MalformedURLException e){
                     Toast.makeText(this, "잘못된 주소입니다!", Toast.LENGTH_SHORT).show();
                 }
@@ -72,48 +73,43 @@ public class LoginActivity extends AppCompatActivity {
                     con = (HttpURLConnection)url.openConnection();
 
                     if(con != null){
-                        Log.d("처음1", "ㅇ");
                         con.setConnectTimeout(10000);
                         con.setUseCaches(false);
                         con.setRequestMethod("POST");
                         con.setRequestProperty("Content-Type", "application/json");
                         con.setDoOutput(true);
                         con.setDoInput(true);
-                        Log.d("처음2", "ㅇ");
                         OutputStream out = con.getOutputStream();
-                        Log.d("처음3", "ㅇ");
                         out.write(loginInfo.getBytes("utf-8"));
-                        Log.d("되는가4","응");
                         out.flush();
                         out.close();
 
                         if(con.getResponseCode() == HttpURLConnection.HTTP_OK){
-
                             InputStreamReader in = new InputStreamReader(con.getInputStream());
                             int ch;
-
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
                             }
                             in.close();
-                            Log.d("되는가5","응");
                         }
+
+                        //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
+                        SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
+
                     }
                 }
                 catch (Exception e){
                     Toast.makeText(this, ""+e.toString(), Toast.LENGTH_SHORT).show();
                 }
-                Log.d("되는가56","응");
                 break;
             case R.id.joinButton:
                 Intent intent = new Intent(this, JoinMemberActivity.class);
                 startActivity(intent);
         }
-
     }
 
+    //자동로그인 메소드
+    public void autoLogin(){
 
-
-
-
+    }
 }
