@@ -95,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
                         SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
-
                     }
                 }
                 catch (Exception e){
