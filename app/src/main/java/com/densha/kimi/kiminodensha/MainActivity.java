@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -60,14 +61,17 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
         String loginId=preferences.getString("loginId","");
         String loginPassword=preferences.getString("lgoinPassword","");
-
+        Log.d("에","ㅇ안뜨나");
         //있으면 로그인화면에 가져와서 아이디 비밀번호 넣고 자동 로그인버튼 실행
-        if(loginId!=null&&loginPassword!=null){
+        if(!loginId.equals("")&&!loginPassword.equals("")){
             //자동로그인해주는 메소드 실행
         }
         // 없으면 빈 로그인화면으로 전환
         else{
-
+            Log.d("dd", "로그");
+            Intent intent = new Intent(this, LoginActivity.class); // 다음 넘어갈 클래스 지정
+            startActivity(intent);
+            Log.d("ㅇㅇ", "ㅇㅇ");
         }
 
 
