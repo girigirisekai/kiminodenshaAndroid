@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
         switch (view.getId()){
             case R.id.loginButton:
+                Log.d("로그인","실행");
                 if ((!idInput.getText().toString().equals("")) && (!idInput.getText().toString().equals(""))) {
                     Log.d("아이디",idInput.getText().toString());
                     Log.d("비밀번호",passwordInput.getText().toString());
@@ -95,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
                         SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
+                        Log.d("로그인","완료");
                     }
                 }
                 catch (Exception e){
