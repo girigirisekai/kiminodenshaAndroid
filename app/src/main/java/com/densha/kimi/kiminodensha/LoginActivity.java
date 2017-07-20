@@ -90,9 +90,6 @@ public class LoginActivity extends AppCompatActivity {
                             int ch;
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
-
-
-
                             }
                             in.close();
 
@@ -142,13 +139,5 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("a","b");
                 startActivity(intent);
         }
-    }
-
-    //자동로그인 메소드
-    public void autoLogin(String loginId){
-        Intent intent = new Intent(this, FavActivity.class);
-        intent.putExtra("id",loginId);
-        startActivity(intent);
-        finish();
     }
 }

@@ -59,24 +59,25 @@ public class MainActivity extends AppCompatActivity {
         //DB에 접근해서 계정 데이터 유무 확인
         Log.d("DB데이터확인","실행");
         SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
-        //String loginId=preferences.getString("loginId","");
-        //String loginPassword=preferences.getString("loginPassword","");
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("loginId");
-        editor.remove("loginPassword");
-        String loginId="";
-        String loginPassword="";
+        String loginId=preferences.getString("loginId","");
+        String loginPassword=preferences.getString("loginPassword","");
         Log.d("DB아이디",": "+loginId);
         Log.d("DB비밀번호",": "+loginPassword);
         Log.d("DB데이터확인","완료");
         //있으면 로그인화면에 가져와서 아이디 비밀번호 넣고 자동 로그인버튼 실행
         if(!loginId.equals("")&&!loginPassword.equals("")){
-            Log.d("자동로그인","실행");
+
             //자동로그인해주는 메소드 실행
-            LoginActivity login=new LoginActivity();
-            login.autoLogin(loginId);
+            Log.d("자동로그인","실행");
+            Log.d("로그인아이디",loginId);
             Intent intent = new Intent(this, FavActivity.class);
+            intent.putExtra("id", loginId);
             startActivity(intent);
+            //clearPreferences();
+            Log.d("자동로그인","완료");
+            finish();
+            Intent intent2 = new Intent(this, FavActivity.class);
+            startActivity(intent2);
         }
         // 없으면 빈 로그인화면으로 전환
         else{
@@ -84,5 +85,16 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+    }
+
+    //Preferences 로그인 데이터 클리어 메소드
+    public void clearPreferences(){
+        Log.d("Preferences클리어","실행");
+        SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("loginId");
+        editor.remove("loginPassword");
+        editor.commit();
+        Log.d("Preferences클리어","완료");
     }
 }
