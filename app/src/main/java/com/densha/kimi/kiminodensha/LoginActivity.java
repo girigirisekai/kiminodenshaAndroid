@@ -133,8 +133,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, ""+e.toString(), Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.joinButton:
+            case R.id.signupButton:
                 Intent intent = new Intent(this, JoinMemberActivity.class);
+                Log.d("a","b");
                 startActivity(intent);
         }
     }
