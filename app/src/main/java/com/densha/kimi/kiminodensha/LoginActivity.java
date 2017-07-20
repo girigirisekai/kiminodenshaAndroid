@@ -123,6 +123,8 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.commit();
                                     Log.d("DB저장", "완료");
                                     Intent intent = new Intent(this, FavActivity.class);
+                                    intent.putExtra("id", idInput.getText().toString());
+                                    intent.putExtra("pass",passwordInput.getText().toString());
                                     startActivity(intent);
                                     break;
                                 default:
