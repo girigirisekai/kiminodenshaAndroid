@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
 
                 try{
-                    Log.d("ip주소","203.233.196.139");
+                    Log.d("ip주소 ","203.233.196.139");
                     url = new URL("http://203.233.196.139:8888/densha/loginandroid");
                 }catch(MalformedURLException e){
                     Toast.makeText(this, "잘못된 주소입니다!", Toast.LENGTH_SHORT).show();
