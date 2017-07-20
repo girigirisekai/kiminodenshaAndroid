@@ -91,8 +91,8 @@ public class LoginActivity extends AppCompatActivity {
                             int ch;
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
-                            } 
-                            in.close();
+                            }
+                            in.close(); 
 
                             Toast.makeText(this,sb.toString(),Toast.LENGTH_SHORT).show();
                             String loginResult=sb.toString();
