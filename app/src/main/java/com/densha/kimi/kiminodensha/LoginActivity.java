@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                             int ch;
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
-                            }
+                            } 
                             in.close();
                             String loginResult=sb.toString();
                             Log.d("로그인결과", loginResult);
