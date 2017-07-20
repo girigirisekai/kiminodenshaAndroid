@@ -92,29 +92,27 @@ public class LoginActivity extends AppCompatActivity {
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
                             }
-                            in.close(); 
+                            in.close();
 
-                            Toast.makeText(this,sb.toString(),Toast.LENGTH_SHORT).show();
-                            String loginResult=sb.toString();
-                            JSONObject jsonObject=new JSONObject(loginResult);
-                            String result2=jsonObject.getJSONObject("result").toString();
-                            Toast.makeText(this,result2,Toast.LENGTH_SHORT).show();
-                            Log.d("로그인결과", loginResult);
                             //서버로부터 수신된 데이터 학인
-                            //1. 전송실패
+                            JSONObject jsonObject=new JSONObject(sb.toString());
+                            String loginResult=jsonObject.getString("result");
+                            Log.d("로그인 결과", loginResult);
+
                             switch (loginResult) {
-                                case "전송실패":
+                                //1. 전송된 데이터 없음
+                                case "notdata":
                                     Log.d("로그인", "전송실패");
                                     break;
-                                case "불일치":
+                                //일치하는 아이디나 비밀번호 없음
+                                case "fail":
                                     Log.d("로그인", "불일치");
                                     break;
-                                case "일치":
-
+                                //일치
+                                case "success":
+                                    Log.d("로그인", "완료");
                                     //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
                                     SharedPreferences preferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
-
-                                    Log.d("로그인", "완료");
                                     break;
                                 default:
                                     Log.d("로그인", "실패");
