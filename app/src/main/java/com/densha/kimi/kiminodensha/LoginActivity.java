@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
 
                 try{
-                    url = new URL("http://:8888/densha/loginandroid");
+                    url = new URL("http://203.233.196.139:8888/densha/loginandroid");
                 }catch(MalformedURLException e){
                     Toast.makeText(this, "잘못된 주소입니다!", Toast.LENGTH_SHORT).show();
                 }
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if(con.getResponseCode() == HttpURLConnection.HTTP_OK){
                             InputStreamReader in = new InputStreamReader(con.getInputStream());
-                            int ch;
+                            int ch; 
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
                             }
@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.d("로그인", "불일치");
                                     break;
                                 case "일치":
+
                                     //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
                                     SharedPreferences preferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
 
