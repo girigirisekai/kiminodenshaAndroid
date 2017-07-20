@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
 
         idInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
-        autoLogin = (CheckBox) findViewById(R.id.checkBox);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
