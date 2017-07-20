@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //자동로그인 메소드
-    public void autoLogin(){
+    public void autoLogin(String loginId,String loginPassword){
 
 
         //Intent intent = new Intent("", "");
