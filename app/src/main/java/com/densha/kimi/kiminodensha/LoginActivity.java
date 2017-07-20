@@ -121,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString("inputPwd", passwordInput.getText().toString());
                                     editor.commit();
                                     Intent intent = new Intent(this, FavActivity.class);
+                                    startActivity(intent);
                                     break;
                                 default:
                                     Log.d("로그인", "실패");
