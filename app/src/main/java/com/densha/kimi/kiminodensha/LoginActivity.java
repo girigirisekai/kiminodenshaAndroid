@@ -91,6 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                             int ch;
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
+
+
+
                             }
                             in.close();
 
@@ -103,10 +106,12 @@ public class LoginActivity extends AppCompatActivity {
                                 //1. 전송된 데이터 없음
                                 case "notdata":
                                     Log.d("로그인", "전송실패");
+                                    Toast.makeText(getApplicationContext(), "Login Fail!", Toast.LENGTH_LONG).show();
                                     break;
                                 //일치하는 아이디나 비밀번호 없음
                                 case "fail":
                                     Log.d("로그인", "불일치");
+                                    Toast.makeText(getApplicationContext(), "Login Fail!", Toast.LENGTH_LONG).show();
                                     break;
                                 //일치
                                 case "success":
@@ -116,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                     break;
                                 default:
                                     Log.d("로그인", "실패");
+                                    Toast.makeText(getApplicationContext(), "Login Fail!", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
@@ -134,4 +140,7 @@ public class LoginActivity extends AppCompatActivity {
     public void autoLogin(){
 
     }
+
+
+
 }
