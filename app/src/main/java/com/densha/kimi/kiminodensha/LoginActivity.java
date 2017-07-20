@@ -101,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject jsonObject=new JSONObject(sb.toString());
                             String loginResult=jsonObject.getString("result");
                             Log.d("로그인 결과", loginResult);
-
                             switch (loginResult) {
                                 //1. 전송된 데이터 없음
                                 case "notdata":
@@ -116,8 +115,13 @@ public class LoginActivity extends AppCompatActivity {
                                 //일치
                                 case "success":
                                     Log.d("로그인", "완료");
+
                                     //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
                                     SharedPreferences preferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString("inputId", idInput.getText().toString());
+                                    editor.putString("inputPwd", passwordInput.getText().toString());
+                                    editor.commit();
                                     break;
                                 default:
                                     Log.d("로그인", "실패");
@@ -139,6 +143,10 @@ public class LoginActivity extends AppCompatActivity {
     //자동로그인 메소드
     public void autoLogin(){
 
+
+        //Intent intent = new Intent("", "");
+        //startActivity(intent);
+        finish();
     }
 
 
