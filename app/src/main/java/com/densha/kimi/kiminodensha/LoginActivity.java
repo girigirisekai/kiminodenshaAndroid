@@ -91,9 +91,14 @@ public class LoginActivity extends AppCompatActivity {
                             int ch;
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
-                            }
+                            } 
                             in.close();
+
+                            Toast.makeText(this,sb.toString(),Toast.LENGTH_SHORT).show();
                             String loginResult=sb.toString();
+                            JSONObject jsonObject=new JSONObject(loginResult);
+                            String result2=jsonObject.getJSONObject("result").toString();
+                            Toast.makeText(this,result2,Toast.LENGTH_SHORT).show();
                             Log.d("로그인결과", loginResult);
                             //서버로부터 수신된 데이터 학인
                             //1. 전송실패
