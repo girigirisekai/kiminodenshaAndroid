@@ -17,7 +17,8 @@ public class FavActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
-        String idcheck=(new Intent()).getStringExtra("id");
+       Intent intent = getIntent();
+        String idcheck=intent.getStringExtra("id");
         Log.d(idcheck, idcheck);
 
     }
