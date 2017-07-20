@@ -84,10 +84,10 @@ public class LoginActivity extends AppCompatActivity {
                         out.write(loginInfo.getBytes("utf-8"));
                         out.flush();
                         out.close();
-
+ 
                         if(con.getResponseCode() == HttpURLConnection.HTTP_OK){
                             InputStreamReader in = new InputStreamReader(con.getInputStream());
-                            int ch; 
+                            int ch;
                             while ((ch = in.read()) != -1){
                                 sb.append((char)ch);
                             }
