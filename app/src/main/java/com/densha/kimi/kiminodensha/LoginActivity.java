@@ -115,12 +115,12 @@ public class LoginActivity extends AppCompatActivity {
                                 case "success":
                                     Log.d("로그인", "완료");
                                     //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
-                                    Intent intent = new Intent(this, FavActivity.class);
                                     SharedPreferences preferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferences.edit();
                                     editor.putString("inputId", idInput.getText().toString());
                                     editor.putString("inputPwd", passwordInput.getText().toString());
                                     editor.commit();
+                                    Intent intent = new Intent(this, FavActivity.class);
                                     break;
                                 default:
                                     Log.d("로그인", "실패");

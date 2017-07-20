@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
     public void mainClick(View view){
         //DB에 접근해서 계정 데이터 유무 확인
         SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
-        String loginId=preferences.getString("id","");
-        String loginPassword=preferences.getString("password","");
+        String loginId=preferences.getString("loginId","");
+        String loginPassword=preferences.getString("loginPassword","");
         //있으면 로그인화면에 가져와서 아이디 비밀번호 넣고 자동 로그인버튼 실행
         if(!loginId.equals("")&&!loginPassword.equals("")){
             //자동로그인해주는 메소드 실행
             LoginActivity login=new LoginActivity();
-            login.autoLogin();
+            login.autoLogin(loginId,loginPassword);
         }
         // 없으면 빈 로그인화면으로 전환
         else{
