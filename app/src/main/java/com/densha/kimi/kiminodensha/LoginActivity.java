@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
 
                 try{
-                    url = new URL("http://10.10.1.143:8888/densha/loginandroid");
+                    url = new URL("http://:8888/densha/loginandroid");
                 }catch(MalformedURLException e){
                     Toast.makeText(this, "잘못된 주소입니다!", Toast.LENGTH_SHORT).show();
                 }
@@ -92,11 +92,27 @@ public class LoginActivity extends AppCompatActivity {
                                 sb.append((char)ch);
                             }
                             in.close();
-                        }
+                            String loginResult=sb.toString();
+                            Log.d("로그인결과", loginResult);
+                            //서버로부터 수신된 데이터 학인
+                            //1. 전송실패
+                            switch (loginResult) {
+                                case "전송실패":
+                                    Log.d("로그인", "전송실패");
+                                    break;
+                                case "불일치":
+                                    Log.d("로그인", "불일치");
+                                    break;
+                                case "일치":
+                                    //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
+                                    SharedPreferences preferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
 
-                        //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
-                        SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
-                        Log.d("로그인","완료");
+                                    Log.d("로그인", "완료");
+                                    break;
+                                default:
+                                    Log.d("로그인", "실패");
+                            }
+                        }
                     }
                 }
                 catch (Exception e){
