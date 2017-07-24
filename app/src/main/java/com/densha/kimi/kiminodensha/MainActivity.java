@@ -148,11 +148,8 @@ public class MainActivity extends AppCompatActivity {
                 //logInfo송신
                 Log.d("서버송신","실행");
                 OutputStream out2 = con.getOutputStream();
-                Log.d("서버송신","1");
                 out2.write(autoLoginInfo.getBytes("utf-8"));
-                Log.d("서버송신","2");
                 out2.flush();
-                Log.d("서버송신","3");
                 out2.close();
                 Log.d("서버송신","완료");
                 Log.d("서버수신","실행");
@@ -186,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(this, FavActivity.class);
                             intent.putExtra("id", id);
                             startActivity(intent);
+                            finish();
                             break;
                         default:
                             Log.d("자동로그인", "실패");

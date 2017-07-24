@@ -218,6 +218,7 @@ public class FavActivity extends AppCompatActivity{
                         Intent intent = new Intent(FavActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
+                        finish();
                         }
                     })
                     .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -228,6 +229,4 @@ public class FavActivity extends AppCompatActivity{
                     .show();
         Log.d("로그아웃","완료");
     }
-
-
 }

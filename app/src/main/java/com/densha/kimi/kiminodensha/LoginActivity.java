@@ -132,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Intent intent = new Intent(this, FavActivity.class);
                                     intent.putExtra("id", idInput.getText().toString());
                                     startActivity(intent);
+                                    finish();
                                     break;
                                 default:
                                     Log.d("로그인", "실패");
@@ -147,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, JoinMemberActivity.class);
                 Log.d("a", "b");
                 startActivity(intent);
+                finish();
         }
     }
 }
