@@ -11,7 +11,8 @@
         android:id="@+id/pikachu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/pikachu"/>
+        android:src="@drawable/pikachu"
+        android:layout_gravity="right"/>
 
 
     <TextView

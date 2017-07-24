@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,8 +75,36 @@ public class FavActivity extends AppCompatActivity{
                     mediaPlayer.setLooping(false);
                     mediaPlayer.start();
                     //mediaPlayer.stop();
+                    Log.d("팝업메뉴","실행");
+                    PopupMenu popup= new PopupMenu(FavActivity.this, view);
+                    popup.getMenuInflater().inflate(R.menu.option_menu,popup.getMenu());
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()){
+                                case R.id.searchStation:
+                                    Log.d("검색하기","실행");
+                                    Toast.makeText(getApplication(),"역검색하기",Toast.LENGTH_SHORT).show();
+                                    Log.d("검색하기","완료");
+                                    break;
+                                case R.id.logout:
+                                    Log.d("로그아웃","실행");
+                                    Toast.makeText(getApplication(),"로그아웃",Toast.LENGTH_SHORT).show();
+                                    Log.d("로그아웃","완료");
+                                    break;
+                                default:
+                                    Log.d("이상한 버튼","실행됨");
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                    popup.show();
+
+                    Log.d("팝업메뉴","완료");
                 }
                 Log.d("피카츄","완료");
+
                 return true;
             }
         });
