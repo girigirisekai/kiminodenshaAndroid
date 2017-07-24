@@ -1,19 +1,24 @@
 package com.densha.kimi.kiminodensha;
 
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,17 +36,19 @@ public class FavActivity extends AppCompatActivity{
 
     String id;
     TextView txt;
+    LinearLayout favMain;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
 
-        id = "loginId:nooti";
+        id = "nooti";
+
+        favMain = (LinearLayout) findViewById(R.id.favMain);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
 
     }
 
@@ -71,7 +78,7 @@ public class FavActivity extends AppCompatActivity{
                     con.setDoOutput(true);
                     con.setDoInput(true);
                     OutputStream out = con.getOutputStream();
-                    out.write("loginId:nooti".getBytes("UTF-8"));
+                    out.write("nooti".getBytes("UTF-8"));
                     out.flush();
                     out.close();
 
@@ -83,22 +90,52 @@ public class FavActivity extends AppCompatActivity{
                             sb.append((char) ch);
                         }
                         in.close();
-                        Log.d("ip주소 ", "203.233.196.139");
                         JSONObject jsonObject = new JSONObject(sb.toString());
-                        String result = jsonObject.getString("result");
+                        String result = jsonObject.getString("RESULT");
                         Log.d("로그인결과", result);
                         //서버로부터 수신된 데이터 학인
                         //1. 전송실패
                         switch (result) {
-                            case "null":
+                            case "NULL":
                                 Log.d("Favorite", "불일치");
                                 break;
-                            case "ok":
-
-                                //로그인된 아이디, 비밀번호를 SharedPreferences에 저장
-                                SharedPreferences preferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
+                            case "OK":
+                                JSONObject item = null;
                                 txt = (TextView) findViewById(R.id.textBox);
                                 txt.setText(result);
+                                txt.append("\n");
+                                JSONArray jarray = jsonObject.getJSONArray("item");
+                                StringBuilder sb2 = new StringBuilder();
+                                for (int i = 0; i < jarray.length(); i++) {
+                                    item = jarray.getJSONObject(i);
+
+                                    LinearLayout linearLayout = new LinearLayout(this);
+                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+                                            (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    linearLayout.setLayoutParams(params);
+                                    linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+                                    TextView textView1 = new TextView(this);
+                                    textView1.setText("FAVORITENAME : "+item.getString("FAVORITENAME"));
+
+                                    TextView textView2 = new TextView(this);
+                                    textView2.setText("STATIONCODE : "+item.getString("STATIONCODE"));
+
+                                    TextView textView3 = new TextView(this);
+                                    textView3.setText("LINE : "+item.getString("LINE"));
+
+                                    TextView textView4 = new TextView(this);
+                                    textView4.setText("FCODE : "+item.getString("FCODE"));
+
+                                    linearLayout.addView(textView1);
+                                    linearLayout.addView(textView2);
+                                    linearLayout.addView(textView3);
+                                    linearLayout.addView(textView4);
+
+                                    //favMain.addView(linearLayout);
+
+                                }
+                                txt.setText(sb2.toString());
                                 Log.d("Favorite", "완료");
                                 break;
                             default:
