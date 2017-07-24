@@ -6,14 +6,19 @@ import android.content.Intent;
 
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +42,7 @@ public class FavActivity extends AppCompatActivity{
     String id;
     TextView txt;
     LinearLayout favMain;
+    Animation alpha=null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +56,27 @@ public class FavActivity extends AppCompatActivity{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+
+        final ImageView pikachu=(ImageView)findViewById(R.id.pikachu);
+        LinearLayout favLinearLayout=(LinearLayout)findViewById(R.id.favMain);
+        alpha= AnimationUtils.loadAnimation(this, R.anim.alpha_pikachu);
+
+        pikachu.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.d("피카츄","실행");
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    pikachu.startAnimation(alpha);
+                    MediaPlayer mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.pikachuuu);
+                    mediaPlayer.setVolume(0.8f, 0.8f);
+                    mediaPlayer.setLooping(false);
+                    mediaPlayer.start();
+                    //mediaPlayer.stop();
+                }
+                Log.d("피카츄","완료");
+                return true;
+            }
+        });
     }
 
     // id로 json읽는 부분

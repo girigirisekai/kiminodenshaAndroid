@@ -19,83 +19,92 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by haleylovespurple on 7/19/17.
+ * Login
  */
 public class LoginActivity extends AppCompatActivity {
 
-    EditText idInput, passwordInput;    //로그인, 비밀번호
-    CheckBox autoLogin;     //자동 로그인 체크박스
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
-    String loginInfo = "";
-    JSONObject json;
+    //변수
+    EditText idInput, passwordInput;    //아이디, 비밀번호
+    SharedPreferences pref;             //DB처럼 복잡한 자료가 아닌 간단한 설정 값을 파일 형태로 저장하는 객체, key, value형태로 저장
+    SharedPreferences.Editor editor;    //SharedPreferences에 값을 넣고 빼기 위한 editor
+    String loginInfo = "";              //서버로 보낼 로그인정보
+    JSONObject json;                    //서버로 보낼 데이터를 먼저 json형태로 만들기 위한 객체
 
+    //메소드
+    //onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //아이디, 패스워드 가져오기
         idInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
 
+        //서버 전송을 위한 설정
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
 
-    public void btnClick(View view){
-
-        switch (view.getId()){
+    //버튼 클릭 시 액션들
+    public void btnClick(View view) {
+        switch (view.getId()) {
+            //로그인 버튼 클릭 시
             case R.id.loginButton:
-                Log.d("로그인","실행");
-                if ((!idInput.getText().toString().equals("")) && (!idInput.getText().toString().equals(""))) {
-                    Log.d("아이디",idInput.getText().toString());
-                    Log.d("비밀번호",passwordInput.getText().toString());
-                    try{
-                        json=new JSONObject("{'id':"+idInput.getText().toString()+",'password':"+passwordInput.getText().toString()+"}");
-                    }catch (JSONException e){
-                        Log.d("json","error");
-                    }
-                    loginInfo = json.toString();
-                    Log.d("login", loginInfo);
-                }
+                Log.d("로그인", "실행");
 
                 URL url = null;
                 HttpURLConnection con = null;
                 StringBuilder sb = new StringBuilder();
 
-                try{
-                    Log.d("ip주소 ","203.233.196.139");
+                if ((!idInput.getText().toString().equals("")) && (!passwordInput.getText().toString().equals(""))) {
+                    Log.d("아이디", idInput.getText().toString());
+                    Log.d("비밀번호", passwordInput.getText().toString());
+                    //JSON타입으로 값을 담음
+                    try {
+                        json = new JSONObject("{'id':" + idInput.getText().toString() + ",'password':" + passwordInput.getText().toString() + "}");
+                    } catch (JSONException e) {
+                        Log.d("json", "error");
+                    }
+                    //String형태로 변환
+                    loginInfo = json.toString();
+                    Log.d("login", loginInfo);
+                }
+                //url설정
+                try {
+                    Log.d("ip주소 ", "203.233.196.139");
                     url = new URL("http://203.233.196.139:8888/densha/loginandroid");
-                }catch(MalformedURLException e){
+                } catch (MalformedURLException e) {
                     Toast.makeText(this, "잘못된 주소입니다!", Toast.LENGTH_SHORT).show();
                 }
-                try{
-                    con = (HttpURLConnection)url.openConnection();
-
-                    if(con != null){
+                try {
+                    //서버와 연결
+                    con = (HttpURLConnection) url.openConnection();
+                    if (con != null) {
                         con.setConnectTimeout(10000);
                         con.setUseCaches(false);
                         con.setRequestMethod("POST");
                         con.setRequestProperty("Content-Type", "application/json");
                         con.setDoOutput(true);
                         con.setDoInput(true);
+                        //logInfo송신
                         OutputStream out = con.getOutputStream();
                         out.write(loginInfo.getBytes("utf-8"));
                         out.flush();
                         out.close();
-
-                        if(con.getResponseCode() == HttpURLConnection.HTTP_OK){
+                        //수신
+                        if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                             InputStreamReader in = new InputStreamReader(con.getInputStream());
                             int ch;
-                            while ((ch = in.read()) != -1){
-                                sb.append((char)ch);
+                            while ((ch = in.read()) != -1) {
+                                sb.append((char) ch);
                             }
                             in.close();
 
-                            //서버로부터 수신된 데이터 학인
-                            JSONObject jsonObject=new JSONObject(sb.toString());
-                            String loginResult=jsonObject.getString("result");
+                            //수신된 데이터 학인
+                            JSONObject jsonObject = new JSONObject(sb.toString());
+                            String loginResult = jsonObject.getString("result");
                             Log.d("로그인 결과", loginResult);
                             switch (loginResult) {
                                 //1. 전송된 데이터 없음
@@ -119,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString("loginPassword", passwordInput.getText().toString());
                                     editor.commit();
                                     Log.d("DB저장", "완료");
+                                    //즐겨찾기 엑티비티로 이동
                                     Intent intent = new Intent(this, FavActivity.class);
                                     intent.putExtra("id", idInput.getText().toString());
                                     startActivity(intent);
@@ -129,14 +139,13 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
                     }
-                }
-                catch (Exception e){
-                    Toast.makeText(this, ""+e.toString(), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "" + e.toString(), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.signupButton:
                 Intent intent = new Intent(this, JoinMemberActivity.class);
-                Log.d("a","b");
+                Log.d("a", "b");
                 startActivity(intent);
         }
     }
