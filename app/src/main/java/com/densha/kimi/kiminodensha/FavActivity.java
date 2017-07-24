@@ -215,6 +215,7 @@ public class FavActivity extends AppCompatActivity{
                 .setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
                 .setPositiveButton("로그아웃", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        clearPreferences();
                         Intent intent = new Intent(FavActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
@@ -228,5 +229,16 @@ public class FavActivity extends AppCompatActivity{
                     })
                     .show();
         Log.d("로그아웃","완료");
+    }
+
+    //Preferences 로그인 데이터 클리어 메소드
+    public void clearPreferences(){
+        Log.d("Preferences클리어","실행");
+        SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("loginId");
+        editor.remove("loginPassword");
+        editor.commit();
+        Log.d("Preferences클리어","완료");
     }
 }
