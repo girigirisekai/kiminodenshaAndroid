@@ -8,7 +8,7 @@
     >
 
     <ImageView
-        android:id="@+id/pikachu"
+        android:id="@+id/pokemon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/pikachu"

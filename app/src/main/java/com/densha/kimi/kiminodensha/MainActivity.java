@@ -83,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
         if(!loginId.equals("")&&!loginPassword.equals("")){
             //자동로그인해주는 메소드 실행
             Log.d("로그인아이디",loginId);
-            //clearPreferences();   //SharedPreferences에 있는 아이디, 비밀번호 값 지울 때 사용
+            /*Log.d("클리어","실행");
+              clearPreferences();   //SharedPreferences에 있는 아이디, 비밀번호 값 지울 때 사용
+            */Log.d("클리어","완료");
             autoLogin(loginId,loginPassword);
             finish();
         }

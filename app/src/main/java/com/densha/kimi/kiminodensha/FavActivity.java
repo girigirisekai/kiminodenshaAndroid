@@ -1,13 +1,11 @@
 package com.densha.kimi.kiminodensha;
 
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -16,21 +14,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStreamReader;
@@ -50,7 +45,9 @@ public class FavActivity extends AppCompatActivity{
     LinearLayout favMain;
     Animation alpha=null;
     String id;
-    ImageView pikachu;
+    ImageView pokemon;
+    int randomChar;
+    MediaPlayer mediaPlayer;
 
     //메소드
     //onCreate
@@ -70,38 +67,80 @@ public class FavActivity extends AppCompatActivity{
 
         //객체 설정
         favMain = (LinearLayout) findViewById(R.id.favMain);
-        pikachu=(ImageView)findViewById(R.id.pikachu);
+        pokemon=(ImageView)findViewById(R.id.pokemon);
         LinearLayout favLinearLayout=(LinearLayout)findViewById(R.id.favMain);
-        alpha= AnimationUtils.loadAnimation(this, R.anim.alpha_pikachu);
+        alpha= AnimationUtils.loadAnimation(this, R.anim.alpha_pokemon);
 
-        //피카츄 버튼 터치리스너
-        pikachu.setOnTouchListener(new View.OnTouchListener() {
+        //1~7까지 난수 생성
+        Log.d("난수", "생성");
+        randomChar=(int)(Math.random()*7)+1;
+        Log.d("난수", Integer.toString(randomChar));
+        //버튼 이미지와 사운드 랜덤으로 선택
+        switch(randomChar){
+            case 1:
+                //피카츄
+                pokemon.setImageResource(R.drawable.pikachu);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.pikachuuu);
+                break;
+            case 2:
+                //이브이
+                pokemon.setImageResource(R.drawable.eevee);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.eevee);
+                break;
+            case 3:
+                //고라파덕
+                pokemon.setImageResource(R.drawable.psyduck);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.gorapaduck);
+                break;
+            case 4:
+                //잠만보
+                pokemon.setImageResource(R.drawable.snorlax);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.zammanbo);
+                break;
+            case 5:
+                //이상해씨
+                pokemon.setImageResource(R.drawable.bullbasaur);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.esanghaesee);
+                break;
+            case 6:
+                //파이리
+                pokemon.setImageResource(R.drawable.charmander);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.pairi);
+                break;
+            case 7:
+                //꼬부기
+                pokemon.setImageResource(R.drawable.squirtle);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.kkobugi);
+                break;
+            default:
+                Log.d("난수","이상함");
+        }
+        //포켓몬 버튼 터치리스너
+        pokemon.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                Log.d("피카츄","실행");
+                Log.d("포켓몬","실행");
                 //버튼 눌릴 시
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    //피카츄 소리 실행
-                    MediaPlayer mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.pikachuuu);
+                    //울음소리 실행
                     mediaPlayer.setVolume(0.8f, 0.8f);
                     mediaPlayer.setLooping(false);
                     mediaPlayer.start();
                     //mediaPlayer.stop();
 
-                    //투명 애니메이션 실행
-                    pikachu.startAnimation(alpha);
-//
+                    //포켓몬 투명 애니메이션 실행
+                    pokemon.startAnimation(alpha);
+
                     Log.d("팝업메뉴","실행");
                     PopupMenu popup= new PopupMenu(FavActivity.this, view);
                     popup.getMenuInflater().inflate(R.menu.option_menu,popup.getMenu());
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            //팝업메뉴에서 눌린 버튼에 따라 선택 사항
+                            //팝업메뉴에서 눌린 버튼에 따라 선택
                             switch (item.getItemId()){
                                 case R.id.searchStation:
                                     Log.d("검색하기","실행");
-                                    //Toast.makeText(getApplication(),"역검색하기",Toast.LENGTH_SHORT).show();
                                     intent=new Intent(FavActivity.this, SearchStationActivity.class);
                                     intent.putExtra("id", id);
                                     startActivity(intent);
@@ -109,8 +148,7 @@ public class FavActivity extends AppCompatActivity{
                                     break;
                                 case R.id.logout:
                                     Log.d("로그아웃","실행");
-                                    //Toast.makeText(getApplication(),"로그아웃",Toast.LENGTH_SHORT).show();
-                                    logOUt();
+                                    logOut();
                                     Log.d("로그아웃","완료");
                                     break;
                                 default:
@@ -123,11 +161,11 @@ public class FavActivity extends AppCompatActivity{
                     popup.show();
                     Log.d("팝업메뉴","완료");
                 }
-                Log.d("피카츄","완료");
+                Log.d("포켓몬","완료");
                 return true;
             }
         });
-
+        //즐겨찾기 리스트 불러오기
         favoriteList();
     }
 
@@ -261,7 +299,8 @@ public class FavActivity extends AppCompatActivity{
         }
     }
 
-    public void logOUt(){
+    //로그아웃
+    public void logOut(){
         Log.d("로그아웃","실행");
         new AlertDialog.Builder(this)
                 .setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
@@ -283,7 +322,7 @@ public class FavActivity extends AppCompatActivity{
         Log.d("로그아웃","완료");
     }
 
-    //Preferences 로그인 데이터 클리어 메소드
+    //Preferences 로그인 데이터 클리어
     public void clearPreferences(){
         Log.d("Preferences클리어","실행");
         SharedPreferences preferences=getSharedPreferences("login_prefs",MODE_PRIVATE);
