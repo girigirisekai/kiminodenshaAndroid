@@ -114,7 +114,7 @@ public class SearchStationActivity extends AppCompatActivity {
 
             Log.d("ip주소 ","203.233.196.139");
             //http://10.0.2.2:8888
-            url = new URL("http://10.0.2.2:8888/densha/androiStationNameSearch");
+            url = new URL("http://203.233.196.139:8888/densha/androiStationNameSearch");
             // 나중에 ip 주소 바꿔주세요
 
         }catch(Exception e){
@@ -222,7 +222,7 @@ public class SearchStationActivity extends AppCompatActivity {
 
             Log.d("ip주소 ","203.233.196.139");
             //http://10.0.2.2:8888
-            url = new URL("http://10.0.2.2:8888/densha/androidNewFavorite");
+            url = new URL("http://203.233.196.139:8888/densha/androidNewFavorite");
             // 나중에 ip 주소 바꿔주세요
 
         }catch(Exception e){
