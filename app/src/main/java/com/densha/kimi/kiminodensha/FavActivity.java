@@ -39,54 +39,72 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by haleylovespurple on 7/20/17.
+ * Favorite
  */
 
 public class FavActivity extends AppCompatActivity{
 
-    String id;
-    TextView txt;
+    //변수
+    Intent intent;
     LinearLayout favMain;
     Animation alpha=null;
+    String id;
+    TextView txt;
+    ImageView pikachu;
 
+    //메소드
+    //onCreate
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
 
-        id = "nooti";
+        //아이디 가져오기
+        intent=getIntent();
+        id=intent.getExtras().getString("id");
+        Log.d("아이디",id);
 
-        favMain = (LinearLayout) findViewById(R.id.favMain);
-
+        //서버 전송을 위한 설정
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
-        final ImageView pikachu=(ImageView)findViewById(R.id.pikachu);
+        //객체 설정
+        favMain = (LinearLayout) findViewById(R.id.favMain);
+        pikachu=(ImageView)findViewById(R.id.pikachu);
         LinearLayout favLinearLayout=(LinearLayout)findViewById(R.id.favMain);
         alpha= AnimationUtils.loadAnimation(this, R.anim.alpha_pikachu);
 
+        //피카츄 버튼 터치리스너
         pikachu.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 Log.d("피카츄","실행");
+                //버튼 눌릴 시
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    //투명 애니메이션 실행
                     pikachu.startAnimation(alpha);
+
+                    //피카츄 소리 실행
                     MediaPlayer mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.pikachuuu);
                     mediaPlayer.setVolume(0.8f, 0.8f);
                     mediaPlayer.setLooping(false);
                     mediaPlayer.start();
                     //mediaPlayer.stop();
+//
                     Log.d("팝업메뉴","실행");
                     PopupMenu popup= new PopupMenu(FavActivity.this, view);
                     popup.getMenuInflater().inflate(R.menu.option_menu,popup.getMenu());
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
+                            //팝업메뉴에서 눌린 버튼에 따라 선택 사항
                             switch (item.getItemId()){
                                 case R.id.searchStation:
                                     Log.d("검색하기","실행");
-                                    Toast.makeText(getApplication(),"역검색하기",Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplication(),"역검색하기",Toast.LENGTH_SHORT).show();
+                                    intent=new Intent(FavActivity.this, SearchStationActivity.class);
+                                    intent.putExtra("id", id);
+                                    startActivity(intent);
                                     Log.d("검색하기","완료");
                                     break;
                                 case R.id.logout:
@@ -103,11 +121,9 @@ public class FavActivity extends AppCompatActivity{
                         }
                     });
                     popup.show();
-
                     Log.d("팝업메뉴","완료");
                 }
                 Log.d("피카츄","완료");
-
                 return true;
             }
         });
@@ -220,14 +236,14 @@ public class FavActivity extends AppCompatActivity{
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         finish();
-                        }
-                    })
-                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
 
-                        }
-                    })
-                    .show();
+                    }
+                })
+                .show();
         Log.d("로그아웃","완료");
     }
 
