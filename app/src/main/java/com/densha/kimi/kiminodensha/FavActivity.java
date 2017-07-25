@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -187,21 +188,58 @@ public class FavActivity extends AppCompatActivity{
 
                                 LinearLayout linearLayout = new LinearLayout(this);
                                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                                        (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                        (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                 linearLayout.setLayoutParams(params);
                                 linearLayout.setOrientation(LinearLayout.VERTICAL);
 
+                                switch (item.getString("LINE")){
+                                    case "1":
+                                        linearLayout.setBackgroundColor(Color.rgb(0,0,102));
+                                        break;
+                                    case "2":
+                                        linearLayout.setBackgroundColor(Color.rgb(51,153,51));
+                                        break;
+                                    case "3":
+                                        linearLayout.setBackgroundColor(Color.rgb(255,102,0));
+                                        break;
+                                    case "4":
+                                        linearLayout.setBackgroundColor(Color.rgb(0, 102, 255));
+                                        break;
+                                    case "5":
+                                        linearLayout.setBackgroundColor(Color.rgb(153, 0, 204));
+                                        break;
+                                    case "6":
+                                        linearLayout.setBackgroundColor(Color.rgb(204, 102, 0));
+                                        break;
+                                    case "7":
+                                        linearLayout.setBackgroundColor(Color.rgb(102, 102, 51));
+                                        break;
+                                    case "8":
+                                        linearLayout.setBackgroundColor(Color.rgb(255, 0, 102));
+                                        break;
+                                    case "9":
+                                        linearLayout.setBackgroundColor(Color.rgb(204, 153, 0));
+                                        break;
+                                    default:
+                                        linearLayout.setBackgroundColor(Color.rgb(102, 102, 102));
+                                        break;
+                                }
+
                                 TextView textView1 = new TextView(this);
                                 textView1.setText("FAVORITENAME : "+item.getString("FAVORITENAME"));
+                                textView1.setTextColor(Color.WHITE);
 
                                 TextView textView2 = new TextView(this);
                                 textView2.setText("STATIONCODE : "+item.getString("STATIONCODE"));
+                                textView2.setTextColor(Color.WHITE);
 
                                 TextView textView3 = new TextView(this);
                                 textView3.setText("LINE : "+item.getString("LINE"));
+                                textView3.setTextColor(Color.WHITE);
 
                                 TextView textView4 = new TextView(this);
                                 textView4.setText("FCODE : "+item.getString("FCODE"));
+                                textView4.setTextColor(Color.WHITE);
 
                                 linearLayout.addView(textView1);
                                 linearLayout.addView(textView2);
