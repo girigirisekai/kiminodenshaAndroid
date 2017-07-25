@@ -15,25 +15,6 @@
         android:layout_gravity="right"/>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="짜잔"/>
-
-    <Button
-        android:id="@+id/getBtn"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="get"
-        android:onClick="favBtn"
-        />
-
-    <TextView
-        android:id="@+id/textBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="dsfasdsadsad"
-        />
 </LinearLayout>
 
 <!--메뉴바 로그아웃 항목, 역등록 항목 만들기-->

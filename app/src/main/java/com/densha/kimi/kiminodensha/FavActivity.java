@@ -49,7 +49,6 @@ public class FavActivity extends AppCompatActivity{
     LinearLayout favMain;
     Animation alpha=null;
     String id;
-    TextView txt;
     ImageView pikachu;
 
     //메소드
@@ -127,10 +126,12 @@ public class FavActivity extends AppCompatActivity{
                 return true;
             }
         });
+
+        favoriteList();
     }
 
     // id로 json읽는 부분
-    public void favBtn (View v){
+    public void favoriteList (){
 
         String getId = id;
         URL url = null;
@@ -155,7 +156,7 @@ public class FavActivity extends AppCompatActivity{
                 con.setDoOutput(true);
                 con.setDoInput(true);
                 OutputStream out = con.getOutputStream();
-                out.write("nooti".getBytes("UTF-8"));
+                out.write(id.getBytes("UTF-8"));
                 out.flush();
                 out.close();
 
@@ -178,9 +179,7 @@ public class FavActivity extends AppCompatActivity{
                             break;
                         case "OK":
                             JSONObject item = null;
-                            txt = (TextView) findViewById(R.id.textBox);
-                            txt.setText(result);
-                            txt.append("\n");
+
                             JSONArray jarray = jsonObject.getJSONArray("item");
                             StringBuilder sb2 = new StringBuilder();
                             for (int i = 0; i < jarray.length(); i++) {
@@ -209,10 +208,9 @@ public class FavActivity extends AppCompatActivity{
                                 linearLayout.addView(textView3);
                                 linearLayout.addView(textView4);
 
-                                //favMain.addView(linearLayout);
+                                favMain.addView(linearLayout);
 
                             }
-                            txt.setText(sb2.toString());
                             Log.d("Favorite", "완료");
                             break;
                         default:
