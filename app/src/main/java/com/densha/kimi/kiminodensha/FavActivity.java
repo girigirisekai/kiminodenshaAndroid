@@ -80,15 +80,15 @@ public class FavActivity extends AppCompatActivity{
                 Log.d("피카츄","실행");
                 //버튼 눌릴 시
                 if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
-                    //투명 애니메이션 실행
-                    pikachu.startAnimation(alpha);
-
                     //피카츄 소리 실행
                     MediaPlayer mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.pikachuuu);
                     mediaPlayer.setVolume(0.8f, 0.8f);
                     mediaPlayer.setLooping(false);
                     mediaPlayer.start();
                     //mediaPlayer.stop();
+
+                    //투명 애니메이션 실행
+                    pikachu.startAnimation(alpha);
 //
                     Log.d("팝업메뉴","실행");
                     PopupMenu popup= new PopupMenu(FavActivity.this, view);
