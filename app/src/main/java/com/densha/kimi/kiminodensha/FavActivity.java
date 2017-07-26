@@ -180,6 +180,129 @@ public class FavActivity extends AppCompatActivity{
         favoriteList();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_fav);
+
+        //아이디 가져오기
+        intent=getIntent();
+        id=intent.getExtras().getString("id");
+        Log.d("아이디",id);
+
+        //서버 전송을 위한 설정
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        //객체 설정
+        favMain = (LinearLayout) findViewById(R.id.favMain);
+        pokemon=(ImageView)findViewById(R.id.pokemon);
+        LinearLayout favLinearLayout=(LinearLayout)findViewById(R.id.favMain);
+        alpha= AnimationUtils.loadAnimation(this, R.anim.alpha_pokemon);
+
+        //1~7까지 난수 생성
+        Log.d("난수", "생성");
+        randomChar=(int)(Math.random()*7)+1;
+        Log.d("난수", Integer.toString(randomChar));
+        //버튼 이미지와 사운드 랜덤으로 선택
+        switch(randomChar){
+            case 1:
+                //피카츄
+                pokemon.setImageResource(R.drawable.pikachu);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.pikachuuu);
+                break;
+            case 2:
+                //이브이
+                pokemon.setImageResource(R.drawable.eevee);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.eevee);
+                break;
+            case 3:
+                //고라파덕
+                pokemon.setImageResource(R.drawable.psyduck);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.gorapaduck);
+                break;
+            case 4:
+                //잠만보
+                pokemon.setImageResource(R.drawable.snorlax);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.zammanbo);
+                break;
+            case 5:
+                //이상해씨
+                pokemon.setImageResource(R.drawable.bullbasaur);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.esanghaesee);
+                break;
+            case 6:
+                //파이리
+                pokemon.setImageResource(R.drawable.charmander);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.pairi);
+                break;
+            case 7:
+                //꼬부기
+                pokemon.setImageResource(R.drawable.squirtle);
+                mediaPlayer=MediaPlayer.create(FavActivity.this,R.raw.kkobugi);
+                break;
+            default:
+                Log.d("난수","이상함");
+        }
+        //포켓몬 버튼 터치리스너
+        pokemon.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.d("포켓몬","실행");
+                //버튼 눌릴 시
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    //울음소리 실행
+                    mediaPlayer.setVolume(0.8f, 0.8f);
+                    mediaPlayer.setLooping(false);
+                    mediaPlayer.start();
+                    //mediaPlayer.stop();
+
+                    //포켓몬 투명 애니메이션 실행
+                    pokemon.startAnimation(alpha);
+
+                    Log.d("팝업메뉴","실행");
+                    PopupMenu popup= new PopupMenu(FavActivity.this, view);
+                    popup.getMenuInflater().inflate(R.menu.option_menu,popup.getMenu());
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            //팝업메뉴에서 눌린 버튼에 따라 선택
+                            switch (item.getItemId()){
+                                case R.id.searchStation:
+                                    Log.d("검색하기","실행");
+                                    intent=new Intent(FavActivity.this, SearchStationActivity.class);
+                                    intent.putExtra("id", id);
+                                    startActivity(intent);
+                                    Log.d("검색하기","완료");
+                                    break;
+                                case R.id.logout:
+                                    Log.d("로그아웃","실행");
+                                    logOut();
+                                    Log.d("로그아웃","완료");
+                                    break;
+                                default:
+                                    Log.d("이상한 버튼","실행됨");
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                    popup.show();
+                    Log.d("팝업메뉴","완료");
+                }
+                Log.d("포켓몬","완료");
+                return true;
+            }
+        });
+        favoriteArray = new ArrayList<>();
+        codeArray = new ArrayList<>();
+        btnTagNum = 0;
+
+        //즐겨찾기 리스트 불러오기
+        favoriteList();
+
+    }
+
     // id로 json읽는 부분
     public void favoriteList (){
 
@@ -347,7 +470,8 @@ public class FavActivity extends AppCompatActivity{
                                                     sb.append((char) ch);
                                                 }
                                                 in.close();
-                                                
+                                                onResume();
+
                                             }
                                         }catch (Exception e){
                                             Toast.makeText(getApplicationContext(), e.getStackTrace().toString(), Toast.LENGTH_SHORT).show();
@@ -412,4 +536,6 @@ public class FavActivity extends AppCompatActivity{
         editor.commit();
         Log.d("Preferences클리어","완료");
     }
+
+
 }
