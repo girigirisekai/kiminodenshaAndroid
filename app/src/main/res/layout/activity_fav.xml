@@ -11,11 +11,8 @@
         android:id="@+id/pokemon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/pikachu"
         android:layout_gravity="right"/>
-
 
 </LinearLayout>
 
-<!--메뉴바 로그아웃 항목, 역등록 항목 만들기-->
 <!--토스트 '이름'님 환영합니다 구현-->
