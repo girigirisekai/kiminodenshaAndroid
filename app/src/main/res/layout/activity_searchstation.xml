@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/searchEditBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10sp"
-        android:text="삼성"/>
-
-    <Button
-        android:id="@+id/searchBtn"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:text="SearchStationName"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/searchEditBox"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:text="홍대"/>
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="120dip"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="Search" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/SearchResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SearchResult"/>
+        android:text="SearchResult"
+        android:visibility="invisible"/>
 
     <ListView
         android:id="@+id/stationList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-
-
+        android:focusable="false">
     </ListView>
-
-
 
 </LinearLayout>
