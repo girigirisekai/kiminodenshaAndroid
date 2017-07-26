@@ -83,6 +83,7 @@ public class SearchStationActivity extends AppCompatActivity {
                 selectedItem = (String) adapter.getItem(i); // 아이템 나오는 부분
                 Toast.makeText(SearchStationActivity.this, selectedItem, Toast.LENGTH_SHORT).show();
                 saveSelectedItem();
+                finish();
             }
         });
     }
@@ -251,7 +252,6 @@ public class SearchStationActivity extends AppCompatActivity {
                         case "True": //성공
                             Toast.makeText(this, "등록되었습니다.", Toast.LENGTH_SHORT).show();
                             txt.setText("성공" + result);
-                            finish();
                             break;
                     }
                 }
