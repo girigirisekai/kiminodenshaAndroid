@@ -63,8 +63,6 @@ public class SearchStationActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.SearchResult);
         lists = (ListView) findViewById(R.id.stationList);
 
-
-
         // Station 정보 버튼
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
