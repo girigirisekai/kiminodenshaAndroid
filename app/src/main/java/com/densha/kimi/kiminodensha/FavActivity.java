@@ -347,12 +347,11 @@ public class FavActivity extends AppCompatActivity{
                                                     sb.append((char) ch);
                                                 }
                                                 in.close();
+                                                
                                             }
                                         }catch (Exception e){
                                             Toast.makeText(getApplicationContext(), e.getStackTrace().toString(), Toast.LENGTH_SHORT).show();
                                         }
-
-                                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
 
                                     }
                                 });
@@ -371,7 +370,7 @@ public class FavActivity extends AppCompatActivity{
                             Log.d("Favorite", "완료");
                             break;
                         default:
-                            Log.d("로그인", "실패");
+                            Log.d("Favorite", "실패");
                     }
                 }
             }
