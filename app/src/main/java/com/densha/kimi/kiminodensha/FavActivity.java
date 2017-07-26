@@ -20,12 +20,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStreamReader;
@@ -33,6 +35,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Favorite
@@ -48,6 +51,10 @@ public class FavActivity extends AppCompatActivity{
     ImageView pokemon;
     int randomChar;
     MediaPlayer mediaPlayer;
+    JSONObject item = null;
+    ArrayList <String> favoriteArray;
+    ArrayList <String> codeArray;
+    int btnTagNum;
 
     //메소드
     //onCreate
@@ -165,6 +172,10 @@ public class FavActivity extends AppCompatActivity{
                 return true;
             }
         });
+        favoriteArray = new ArrayList<>();
+        codeArray = new ArrayList<>();
+        btnTagNum = 0;
+
         //즐겨찾기 리스트 불러오기
         favoriteList();
     }
@@ -207,29 +218,29 @@ public class FavActivity extends AppCompatActivity{
                         sb.append((char) ch);
                     }
                     in.close();
-                    JSONObject jsonObject = new JSONObject(sb.toString());
+                    final JSONObject jsonObject = new JSONObject(sb.toString());
                     String result = jsonObject.getString("RESULT");
                     Log.d("로그인결과", result);
                     //서버로부터 수신된 데이터 학인
-                    //1. 전송실패
                     switch (result) {
+                        //자료가 없을 시
                         case "NULL":
                             Log.d("Favorite", "불일치");
                             break;
+                        //자료가 있을 시
                         case "OK":
-                            JSONObject item = null;
-
                             JSONArray jarray = jsonObject.getJSONArray("item");
                             StringBuilder sb2 = new StringBuilder();
                             for (int i = 0; i < jarray.length(); i++) {
                                 item = jarray.getJSONObject(i);
 
-                                LinearLayout linearLayout = new LinearLayout(this);
+                                final LinearLayout linearLayout = new LinearLayout(this);
                                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
                                         (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                 linearLayout.setLayoutParams(params);
                                 linearLayout.setOrientation(LinearLayout.VERTICAL);
 
+                                //호선 별 색상
                                 switch (item.getString("LINE")){
                                     case "1":
                                         linearLayout.setBackgroundColor(Color.rgb(0,0,102));
@@ -263,13 +274,15 @@ public class FavActivity extends AppCompatActivity{
                                         break;
                                 }
 
-                                TextView textView1 = new TextView(this);
+                                final TextView textView1 = new TextView(this);
                                 textView1.setText("FAVORITENAME : "+item.getString("FAVORITENAME"));
                                 textView1.setTextColor(Color.WHITE);
+                                favoriteArray.add(item.getString("FAVORITENAME"));
 
                                 TextView textView2 = new TextView(this);
                                 textView2.setText("STATIONCODE : "+item.getString("STATIONCODE"));
                                 textView2.setTextColor(Color.WHITE);
+                                codeArray.add(item.getString("STATIONCODE"));
 
                                 TextView textView3 = new TextView(this);
                                 textView3.setText("LINE : "+item.getString("LINE"));
@@ -279,10 +292,78 @@ public class FavActivity extends AppCompatActivity{
                                 textView4.setText("FCODE : "+item.getString("FCODE"));
                                 textView4.setTextColor(Color.WHITE);
 
+                                //버튼 생성 및 삭제
+                                Button button = new Button(this);
+                                button.setTag(btnTagNum);
+                                //클릭 시 메소드 작동
+                                button.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        int keyNum = (int) view.getTag();
+
+                                        URL url = null;
+                                        HttpURLConnection con = null;
+                                        StringBuilder sb = new StringBuilder();
+
+                                        //삭제 정보 JSON파일 만들기
+                                        JSONObject btnJsonObjec = new JSONObject();
+                                        try{
+                                            btnJsonObjec.put("STATIONNAME", favoriteArray.get(keyNum));
+                                            btnJsonObjec.put("STATIONCODE", codeArray.get(keyNum));
+                                            btnJsonObjec.put("ID", id);
+
+                                        }catch (JSONException e){
+                                            Toast.makeText(getApplicationContext(), e.getStackTrace().toString(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        try {
+                                            Log.d("ip주소 ", "203.233.196.139");
+                                            //http://10.0.2.2:8888
+                                            url = new URL("http://203.233.196.139:8888/densha/androidDeleteFavorite");
+                                        } catch (MalformedURLException e) {
+                                            Toast.makeText(getApplicationContext(), "잘못된 주소입니다!", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        try {
+                                            con = (HttpURLConnection) url.openConnection();
+
+                                            if (con != null) {
+                                                con.setConnectTimeout(10000);
+                                                con.setUseCaches(false);
+                                                con.setRequestMethod("POST");
+                                                con.setRequestProperty("Content-Type", "application/json");
+                                                con.setDoOutput(true);
+                                                con.setDoInput(true);
+                                                OutputStream out = con.getOutputStream();
+                                                out.write(btnJsonObjec.toString().getBytes("UTF-8"));
+                                                out.flush();
+                                                out.close();
+                                            }
+                                            if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+                                                InputStreamReader in = new InputStreamReader(con.getInputStream());
+                                                int ch;
+                                                while ((ch = in.read()) != -1) {
+                                                    sb.append((char) ch);
+                                                }
+                                                in.close();
+                                            }
+                                        }catch (Exception e){
+                                            Toast.makeText(getApplicationContext(), e.getStackTrace().toString(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                                button.setText("삭제");
+                                btnTagNum++;
+
                                 linearLayout.addView(textView1);
                                 linearLayout.addView(textView2);
                                 linearLayout.addView(textView3);
                                 linearLayout.addView(textView4);
+                                linearLayout.addView(button);
 
                                 favMain.addView(linearLayout);
 
