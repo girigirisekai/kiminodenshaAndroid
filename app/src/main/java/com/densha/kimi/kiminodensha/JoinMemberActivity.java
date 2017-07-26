@@ -249,6 +249,7 @@ public class JoinMemberActivity extends AppCompatActivity {
             case R.id.checkCodeOk:
                 Log.d(checkNum,checkNum);
                 if(editCheckCode.getText().toString().equals(checkNum)){
+                    timer.cancel();
                     checkBtnOk.setVisibility(View.GONE);
                     joinButton.setVisibility(View.VISIBLE);
                 }
