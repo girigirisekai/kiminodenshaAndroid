@@ -29,21 +29,21 @@ import java.net.URL;
  */
 
 public class JoinMemberActivity extends AppCompatActivity {
-        JSONObject json;
-        EditText editId;
-        EditText editPassword;
-        EditText editAnswer;
-        EditText editCheckCode;
-        Spinner spinner1;
-        ArrayAdapter adapter;
-        String logininfo;
-        String checkNum;
-        Button checkBtn;
-        Button checkBtnOk;
-        Button joinButton;
-        String androidresult;
-        TextView timerText;
-        CountDownTimer timer;
+    JSONObject json;
+    EditText editId;
+    EditText editPassword;
+    EditText editAnswer;
+    EditText editCheckCode;
+    Spinner spinner1;
+    ArrayAdapter adapter;
+    String logininfo;
+    String checkNum;
+    Button checkBtn;
+    Button checkBtnOk;
+    Button joinButton;
+    String androidresult;
+    TextView timerText;
+    CountDownTimer timer;
 
 
 
@@ -53,21 +53,21 @@ public class JoinMemberActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-            editId= (EditText) findViewById(R.id.editId);
-            editPassword= (EditText) findViewById(R.id.editPassword);
-            editAnswer= (EditText) findViewById(R.id.editAnswer);
-            editCheckCode= (EditText) findViewById(R.id.editCheckCode);
-            spinner1 =(Spinner)findViewById(R.id.answerSpinner);
-            checkBtn = (Button)findViewById(R.id.checkCode);
-            checkBtnOk = (Button)findViewById(R.id.checkCodeOk);
-            joinButton = (Button)findViewById(R.id.joinButton);
-            timerText = (TextView)findViewById(R.id.timerText);
+        editId= (EditText) findViewById(R.id.editId);
+        editPassword= (EditText) findViewById(R.id.editPassword);
+        editAnswer= (EditText) findViewById(R.id.editAnswer);
+        editCheckCode= (EditText) findViewById(R.id.editCheckCode);
+        spinner1 =(Spinner)findViewById(R.id.answerSpinner);
+        checkBtn = (Button)findViewById(R.id.checkCode);
+        checkBtnOk = (Button)findViewById(R.id.checkCodeOk);
+        joinButton = (Button)findViewById(R.id.joinButton);
+        timerText = (TextView)findViewById(R.id.timerText);
 
-            adapter = ArrayAdapter.createFromResource(
-                    this, R.array.text_pw, android.R.layout.simple_spinner_item);
-            adapter.setDropDownViewResource(
-                    android.R.layout.simple_spinner_dropdown_item);
-            spinner1.setAdapter(adapter);
+        adapter = ArrayAdapter.createFromResource(
+                this, R.array.text_pw, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(adapter);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -89,20 +89,20 @@ public class JoinMemberActivity extends AppCompatActivity {
                 String question = spinner1.getSelectedItem().toString().replace(" ", "_");
                 Log.d("spinner1",question);
 
-               if(!editId.getText().toString().equals("")&&!editPassword.getText().toString().equals("")&&!editAnswer.getText().toString().equals("")
-                    &&!editCheckCode.getText().toString().equals("")&&!spinner1.getSelectedItem().equals("")){
-                  try {
-                      json = new JSONObject("{'id':"+editId.getText().toString()+",'password':"+editPassword.getText().toString()
-                              + ",'question':"+question+ ",'answer':"+editAnswer.getText().toString()
-                              +",'type':"+editCheckCode.getText().toString()+"}");
+                if(!editId.getText().toString().equals("")&&!editPassword.getText().toString().equals("")&&!editAnswer.getText().toString().equals("")
+                        &&!editCheckCode.getText().toString().equals("")&&!spinner1.getSelectedItem().equals("")){
+                    try {
+                        json = new JSONObject("{'id':"+editId.getText().toString()+",'password':"+editPassword.getText().toString()
+                                + ",'question':"+question+ ",'answer':"+editAnswer.getText().toString()
+                                +",'type':"+editCheckCode.getText().toString()+"}");
 
 
 
-                  }catch (JSONException e){
-                      Log.d("json","error");
-                  }
-                   logininfo = json.toString();
-                   Log.d("login", logininfo);
+                    }catch (JSONException e){
+                        Log.d("json","error");
+                    }
+                    logininfo = json.toString();
+                    Log.d("login", logininfo);
 
                 }
 
@@ -111,7 +111,7 @@ public class JoinMemberActivity extends AppCompatActivity {
                 StringBuffer sb = new StringBuffer();
 
                 try{
-                    url = new URL("http://203.233.196.147:8888/densha/joinandroid");
+                    url = new URL("http://203.233.196.139:8888/densha/joinandroid");
                 }catch (MalformedURLException e){
                     Toast.makeText(this, "잘못된 URL입니다.", Toast.LENGTH_SHORT).show();
                 }try {
@@ -156,17 +156,17 @@ public class JoinMemberActivity extends AppCompatActivity {
                 Toast.makeText(this, "" + e.toString(), Toast.LENGTH_SHORT).show();
             }
 
-                 break;
+                break;
 
             case R.id.checkCode:
 
                 if(!editId.getText().toString().equals("")&&!editPassword.getText().toString().equals("")&&!editAnswer.getText().toString().equals("")
-                       &&!spinner1.getSelectedItem().equals("")){
+                        &&!spinner1.getSelectedItem().equals("")){
                     question = spinner1.getSelectedItem().toString().replace(" ", "_");
                     try {
                         json = new JSONObject("{'id':"+editId.getText().toString()+",'password':"+editPassword.getText().toString()
                                 + ",'question':"+question+ ",'answer':"+editAnswer.getText().toString()
-                               +"}");
+                                +"}");
 
                     }catch (JSONException e){
                         Log.d("json","error");
@@ -175,10 +175,10 @@ public class JoinMemberActivity extends AppCompatActivity {
                     Log.d("login", logininfo);
 
                 }
-                    timer = new CountDownTimer(300*1000, 1000) {
-                        int value= 300;
+                timer = new CountDownTimer(300*1000, 1000) {
+                    int value= 300;
 
-                        @Override
+                    @Override
                     public void onTick(long l) {
                         value--;
                         timerText.setText("현재 남은 시간 =" + value/60 +"분" + value% 60 +"초");
@@ -203,7 +203,7 @@ public class JoinMemberActivity extends AppCompatActivity {
                 sb = new StringBuffer();
 
                 try{
-                    url = new URL("http://203.233.196.147:8888/densha/checkcodeandroid");
+                    url = new URL("http://203.233.196.139:8888/densha/checkcodeandroid");
                 }catch (MalformedURLException e){
                     Toast.makeText(this, "잘못된 URL입니다.", Toast.LENGTH_SHORT).show();
                 }try {
@@ -225,7 +225,7 @@ public class JoinMemberActivity extends AppCompatActivity {
                     os.write(logininfo.getBytes("utf-8"));
                     os.flush();
                     os.close();
-                   if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         InputStreamReader in = new InputStreamReader(con.getInputStream());
                         int ch;
                         while ((ch = in.read()) != -1) {
@@ -237,9 +237,9 @@ public class JoinMemberActivity extends AppCompatActivity {
                         JSONObject jsonObject=new JSONObject(sb.toString());
                         checkNum=jsonObject.getString("code");
                         Log.d("인증번호 결과", checkNum);
-                       checkBtn.setVisibility(View.GONE);
-                       checkBtnOk.setVisibility(View.VISIBLE);
-                       timer.start();
+                        checkBtn.setVisibility(View.GONE);
+                        checkBtnOk.setVisibility(View.VISIBLE);
+                        timer.start();
                     }
                 }
             }catch (Exception e) {
