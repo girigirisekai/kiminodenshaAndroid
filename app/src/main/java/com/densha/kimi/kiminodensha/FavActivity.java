@@ -596,6 +596,4 @@ public class FavActivity extends AppCompatActivity{
         editor.commit();
         Log.d("Preferences클리어","완료");
     }
-
-
 }
