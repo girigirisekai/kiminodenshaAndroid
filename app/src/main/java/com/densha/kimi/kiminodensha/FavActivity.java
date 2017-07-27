@@ -473,7 +473,7 @@ public class FavActivity extends AppCompatActivity{
 
                                 paramDeleteBtn.weight = 1f;
 
-                                //역 이름 레이아웃
+                                //삭제 버튼 레이아웃
                                 LinearLayout linearDelete = new LinearLayout(this);
                                 linearDelete.setLayoutParams(paramDeleteBtn);
                                 linearDelete.setOrientation(LinearLayout.VERTICAL);
@@ -533,6 +533,7 @@ public class FavActivity extends AppCompatActivity{
                                                     sb.append((char) ch);
                                                 }
                                                 in.close();
+                                                Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                                                 onResume();
 
                                             }
