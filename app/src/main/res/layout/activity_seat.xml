@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="63dp"
+        android:id="@+id/linearLayout2">
+
+        <ImageView
+            android:id="@+id/pokemon1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bullbasaur"/>
+
+        <ImageView
+            android:id="@+id/pokemon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pikachu" />
+
+
+
+
+        <ImageView
+            android:id="@+id/pokemon3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/charmander"
+            android:layout_marginBottom="40dp"/>
+
+
+
+
+
+        <ImageView
+            android:id="@+id/pokemon4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/eevee" />
+
+
+
+        <ImageView
+            android:id="@+id/pokemon5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/jigglypuff" />
+
+        <ImageView
+            android:id="@+id/pokemon6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/weedle" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="0dp"
+        android:layout_marginEnd="26dp"
+        android:layout_alignBottom="@+id/linearLayout2"
+        android:layout_alignParentEnd="true">
+
+
+        <ImageView
+            android:id="@+id/pokemon7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/meowth"
+            android:layout_marginTop="24dp" />
+
+        <ImageView
+            android:id="@+id/pokemon8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pidgey" />
+
+        <ImageView
+            android:id="@+id/pokemon9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/squirtle"
+            android:layout_marginBottom="40dp"/>
+
+        <ImageView
+            android:id="@+id/pokemon10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/psyduck"/>
+
+        <ImageView
+            android:id="@+id/pokemon11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/snorlax" />
+
+        <ImageView
+            android:id="@+id/pokemon12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/charmander" />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

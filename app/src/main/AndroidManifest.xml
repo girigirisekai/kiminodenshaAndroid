@@ -20,6 +20,9 @@
         <activity android:name=".JoinMemberActivity"/>
         <activity android:name=".FavActivity"/>
         <activity android:name=".SearchStationActivity"/>
+        <activity android:name=".SeatActivity"/>
+        <activity android:name=".BoxActivity"/>
+
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
