@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="text_pw">
+        <item>2차비밀번호 선택</item>
+        <item>태어난 고향은 어디입니까?</item>
+        <item>졸업한 초등학교는 어디입니까?</item>
+        <item>보물 1호는 무엇입니까?</item>
+    </string-array>
+
+</resources>

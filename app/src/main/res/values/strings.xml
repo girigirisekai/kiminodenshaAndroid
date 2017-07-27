@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Kiminodensha</string>
+    <string name="text_password">2차비밀번호</string>
 </resources>
+
+
+
