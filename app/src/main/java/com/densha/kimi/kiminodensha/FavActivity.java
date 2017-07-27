@@ -357,63 +357,109 @@ public class FavActivity extends AppCompatActivity{
                             for (int i = 0; i < jarray.length(); i++) {
                                 item = jarray.getJSONObject(i);
 
-                                final LinearLayout linearLayout = new LinearLayout(this);
+                                //ArrayList에 데이터 값 입력
+                                favoriteArray.add(item.getString("FAVORITENAME"));
+                                codeArray.add(item.getString("STATIONCODE"));
+
+                                LinearLayout linearLayout = new LinearLayout(this);
                                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
                                         (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                 linearLayout.setLayoutParams(params);
-                                linearLayout.setOrientation(LinearLayout.VERTICAL);
+                                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                                linearLayout.setPadding(10,10,10,10);
+
+                                //호선 레이아웃 비율
+                                LinearLayout.LayoutParams paramLine = new LinearLayout.LayoutParams
+                                        (0, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                paramLine.weight = 1f;
+
+                                //호선 레이아웃
+                                LinearLayout linearLine = new LinearLayout(this);
+                                linearLine.setLayoutParams(paramLine);
+                                linearLine.setOrientation(LinearLayout.VERTICAL);
+
+                                TextView line = new TextView(this);
+                                line.setText("호선");
+                                line.setTextColor(Color.WHITE);
+                                line.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+                                TextView lineNum = new TextView(this);
+                                lineNum.setText(item.getString("LINE"));
+                                lineNum.setTextColor(Color.WHITE);
+                                lineNum.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                                 //호선 별 색상
                                 switch (item.getString("LINE")){
                                     case "1":
-                                        linearLayout.setBackgroundColor(Color.rgb(0,0,102));
+                                        linearLine.setBackgroundColor(Color.rgb(0,0,102));
                                         break;
                                     case "2":
-                                        linearLayout.setBackgroundColor(Color.rgb(51,153,51));
+                                        linearLine.setBackgroundColor(Color.rgb(51,153,51));
                                         break;
                                     case "3":
-                                        linearLayout.setBackgroundColor(Color.rgb(255,102,0));
+                                        linearLine.setBackgroundColor(Color.rgb(255,102,0));
                                         break;
                                     case "4":
-                                        linearLayout.setBackgroundColor(Color.rgb(0, 102, 255));
+                                        linearLine.setBackgroundColor(Color.rgb(0, 102, 255));
                                         break;
                                     case "5":
-                                        linearLayout.setBackgroundColor(Color.rgb(153, 0, 204));
+                                        linearLine.setBackgroundColor(Color.rgb(153, 0, 204));
                                         break;
                                     case "6":
-                                        linearLayout.setBackgroundColor(Color.rgb(204, 102, 0));
+                                        linearLine.setBackgroundColor(Color.rgb(204, 102, 0));
                                         break;
                                     case "7":
-                                        linearLayout.setBackgroundColor(Color.rgb(102, 102, 51));
+                                        linearLine.setBackgroundColor(Color.rgb(102, 102, 51));
                                         break;
                                     case "8":
-                                        linearLayout.setBackgroundColor(Color.rgb(255, 0, 102));
+                                        linearLine.setBackgroundColor(Color.rgb(255, 0, 102));
                                         break;
                                     case "9":
-                                        linearLayout.setBackgroundColor(Color.rgb(204, 153, 0));
+                                        linearLine.setBackgroundColor(Color.rgb(204, 153, 0));
                                         break;
                                     default:
-                                        linearLayout.setBackgroundColor(Color.rgb(102, 102, 102));
+                                        linearLine.setBackgroundColor(Color.rgb(102, 102, 102));
                                         break;
                                 }
 
-                                final TextView textView1 = new TextView(this);
-                                textView1.setText("FAVORITENAME : "+item.getString("FAVORITENAME"));
-                                textView1.setTextColor(Color.WHITE);
-                                favoriteArray.add(item.getString("FAVORITENAME"));
+                                linearLine.addView(line);
+                                linearLine.addView(lineNum);
 
-                                TextView textView2 = new TextView(this);
-                                textView2.setText("STATIONCODE : "+item.getString("STATIONCODE"));
-                                textView2.setTextColor(Color.WHITE);
-                                codeArray.add(item.getString("STATIONCODE"));
+                                linearLayout.addView(linearLine);
 
-                                TextView textView3 = new TextView(this);
-                                textView3.setText("LINE : "+item.getString("LINE"));
-                                textView3.setTextColor(Color.WHITE);
+                                //역 이름 레이아웃 비율
+                                LinearLayout.LayoutParams paramStation = new LinearLayout.LayoutParams
+                                        (0, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                                TextView textView4 = new TextView(this);
-                                textView4.setText("FCODE : "+item.getString("FCODE"));
-                                textView4.setTextColor(Color.WHITE);
+                                paramStation.weight = 3f;
+
+                                //역 이름 레이아웃
+                                LinearLayout linearStation = new LinearLayout(this);
+                                linearStation.setLayoutParams(paramStation);
+                                linearStation.setOrientation(LinearLayout.VERTICAL);
+
+                                TextView station = new TextView(this);
+                                station.setText("STATION");
+
+                                TextView stationName = new TextView(this);
+                                stationName.setText(item.getString("FAVORITENAME"));
+
+                                linearStation.addView(station);
+                                linearStation.addView(stationName);
+
+                                linearLayout.addView(linearStation);
+
+                                //삭제 버튼 레이아웃 비율
+                                LinearLayout.LayoutParams paramDeleteBtn = new LinearLayout.LayoutParams
+                                        (0, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                paramDeleteBtn.weight = 1f;
+
+                                //역 이름 레이아웃
+                                LinearLayout linearDelete = new LinearLayout(this);
+                                linearDelete.setLayoutParams(paramDeleteBtn);
+                                linearDelete.setOrientation(LinearLayout.VERTICAL);
 
                                 //버튼 생성 및 삭제
                                 Button button = new Button(this);
@@ -482,11 +528,8 @@ public class FavActivity extends AppCompatActivity{
                                 button.setText("삭제");
                                 btnTagNum++;
 
-                                linearLayout.addView(textView1);
-                                linearLayout.addView(textView2);
-                                linearLayout.addView(textView3);
-                                linearLayout.addView(textView4);
-                                linearLayout.addView(button);
+                                linearDelete.addView(button);
+                                linearLayout.addView(linearDelete);
 
                                 favMain.addView(linearLayout);
 
