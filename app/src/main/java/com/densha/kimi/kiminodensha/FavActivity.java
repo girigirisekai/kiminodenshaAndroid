@@ -383,7 +383,7 @@ public class FavActivity extends AppCompatActivity{
                                         (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                 linearLayout.setLayoutParams(params);
                                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                                linearLayout.setPadding(10,10,10,10);
+                                linearLayout.setPadding(15,10,15,0);
 
                                 //호선 레이아웃 비율
                                 LinearLayout.LayoutParams paramLine = new LinearLayout.LayoutParams
@@ -396,14 +396,23 @@ public class FavActivity extends AppCompatActivity{
                                 linearLine.setLayoutParams(paramLine);
                                 linearLine.setOrientation(LinearLayout.VERTICAL);
 
+                                TextView blank_1 = new TextView(this);
+                                blank_1.setTextSize(5);
+                                blank_1.setBackgroundColor(Color.WHITE);
+
+                                TextView blank_2 = new TextView(this);
+                                blank_2.setTextSize(5);
+
                                 TextView line = new TextView(this);
                                 line.setText("호선");
                                 line.setTextColor(Color.WHITE);
+                                line.setPadding(0,10,0,0);
                                 line.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                                 TextView lineNum = new TextView(this);
                                 lineNum.setText(item.getString("LINE"));
                                 lineNum.setTextColor(Color.WHITE);
+                                lineNum.setTextSize(18);
                                 lineNum.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                                 //호선 별 색상
@@ -440,8 +449,10 @@ public class FavActivity extends AppCompatActivity{
                                         break;
                                 }
 
+                                linearLine.addView(blank_1);
                                 linearLine.addView(line);
                                 linearLine.addView(lineNum);
+                                linearLine.addView(blank_2);
 
                                 linearLayout.addView(linearLine);
 
@@ -455,12 +466,15 @@ public class FavActivity extends AppCompatActivity{
                                 LinearLayout linearStation = new LinearLayout(this);
                                 linearStation.setLayoutParams(paramStation);
                                 linearStation.setOrientation(LinearLayout.VERTICAL);
+                                linearStation.setPadding(5,0,0,0);
 
                                 TextView station = new TextView(this);
                                 station.setText("STATION");
+                                station.setPadding(15, 0, 15, 0);
 
                                 TextView stationName = new TextView(this);
                                 stationName.setText(item.getString("FAVORITENAME"));
+                                stationName.setPadding(15, 0, 15, 0);
 
                                 linearStation.addView(station);
                                 linearStation.addView(stationName);
@@ -477,6 +491,7 @@ public class FavActivity extends AppCompatActivity{
                                 LinearLayout linearDelete = new LinearLayout(this);
                                 linearDelete.setLayoutParams(paramDeleteBtn);
                                 linearDelete.setOrientation(LinearLayout.VERTICAL);
+                                linearDelete.setPadding(0,20,0,0);
 
                                 //버튼 생성 및 삭제
                                 Button button = new Button(this);
@@ -548,6 +563,40 @@ public class FavActivity extends AppCompatActivity{
 
                                 linearDelete.addView(button);
                                 linearLayout.addView(linearDelete);
+
+                                //상행선 하행선 버튼 레이아웃
+                                LinearLayout.LayoutParams paramBottom = new LinearLayout.LayoutParams
+                                        (ViewGroup.LayoutParams.MATCH_PARENT, 60);
+
+                                LinearLayout linearBottomLayout = new LinearLayout(this);
+                                linearBottomLayout.setLayoutParams(paramBottom);
+                                linearBottomLayout.setOrientation(LinearLayout.HORIZONTAL);
+                                linearBottomLayout.setPadding(0,0,0,0);
+
+                                //상행선
+                                Button nobori = new Button(this);
+                                nobori.setText("상행선");
+                                nobori.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                });
+
+                                //하행선
+                                Button kudari = new Button(this);
+                                kudari.setText("하행선");
+                                kudari.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        
+                                    }
+                                });
+
+                                linearBottomLayout.addView(nobori);
+                                linearBottomLayout.addView(kudari);
+
+                                linearStation.addView(linearBottomLayout);
 
                                 favMain.addView(linearLayout);
 
