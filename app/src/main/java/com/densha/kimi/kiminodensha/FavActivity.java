@@ -374,63 +374,124 @@ public class FavActivity extends AppCompatActivity{
                             for (int i = 0; i < jarray.length(); i++) {
                                 item = jarray.getJSONObject(i);
 
-                                final LinearLayout linearLayout = new LinearLayout(this);
+                                //ArrayList에 데이터 값 입력
+                                favoriteArray.add(item.getString("FAVORITENAME"));
+                                codeArray.add(item.getString("STATIONCODE"));
+
+                                LinearLayout linearLayout = new LinearLayout(this);
                                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
                                         (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                 linearLayout.setLayoutParams(params);
-                                linearLayout.setOrientation(LinearLayout.VERTICAL);
+                                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                                linearLayout.setPadding(15,10,15,0);
+
+                                //호선 레이아웃 비율
+                                LinearLayout.LayoutParams paramLine = new LinearLayout.LayoutParams
+                                        (0, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                paramLine.weight = 1f;
+
+                                //호선 레이아웃
+                                LinearLayout linearLine = new LinearLayout(this);
+                                linearLine.setLayoutParams(paramLine);
+                                linearLine.setOrientation(LinearLayout.VERTICAL);
+
+                                TextView blank_1 = new TextView(this);
+                                blank_1.setTextSize(5);
+                                blank_1.setBackgroundColor(Color.WHITE);
+
+                                TextView blank_2 = new TextView(this);
+                                blank_2.setTextSize(5);
+
+                                TextView line = new TextView(this);
+                                line.setText("호선");
+                                line.setTextColor(Color.WHITE);
+                                line.setPadding(0,10,0,0);
+                                line.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+                                TextView lineNum = new TextView(this);
+                                lineNum.setText(item.getString("LINE"));
+                                lineNum.setTextColor(Color.WHITE);
+                                lineNum.setTextSize(18);
+                                lineNum.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                                 //호선 별 색상
                                 switch (item.getString("LINE")){
                                     case "1":
-                                        linearLayout.setBackgroundColor(Color.rgb(0,0,102));
+                                        linearLine.setBackgroundColor(Color.rgb(0,0,102));
                                         break;
                                     case "2":
-                                        linearLayout.setBackgroundColor(Color.rgb(51,153,51));
+                                        linearLine.setBackgroundColor(Color.rgb(51,153,51));
                                         break;
                                     case "3":
-                                        linearLayout.setBackgroundColor(Color.rgb(255,102,0));
+                                        linearLine.setBackgroundColor(Color.rgb(255,102,0));
                                         break;
                                     case "4":
-                                        linearLayout.setBackgroundColor(Color.rgb(0, 102, 255));
+                                        linearLine.setBackgroundColor(Color.rgb(0, 102, 255));
                                         break;
                                     case "5":
-                                        linearLayout.setBackgroundColor(Color.rgb(153, 0, 204));
+                                        linearLine.setBackgroundColor(Color.rgb(153, 0, 204));
                                         break;
                                     case "6":
-                                        linearLayout.setBackgroundColor(Color.rgb(204, 102, 0));
+                                        linearLine.setBackgroundColor(Color.rgb(204, 102, 0));
                                         break;
                                     case "7":
-                                        linearLayout.setBackgroundColor(Color.rgb(102, 102, 51));
+                                        linearLine.setBackgroundColor(Color.rgb(102, 102, 51));
                                         break;
                                     case "8":
-                                        linearLayout.setBackgroundColor(Color.rgb(255, 0, 102));
+                                        linearLine.setBackgroundColor(Color.rgb(255, 0, 102));
                                         break;
                                     case "9":
-                                        linearLayout.setBackgroundColor(Color.rgb(204, 153, 0));
+                                        linearLine.setBackgroundColor(Color.rgb(204, 153, 0));
                                         break;
                                     default:
-                                        linearLayout.setBackgroundColor(Color.rgb(102, 102, 102));
+                                        linearLine.setBackgroundColor(Color.rgb(102, 102, 102));
                                         break;
                                 }
 
-                                final TextView textView1 = new TextView(this);
-                                textView1.setText("FAVORITENAME : "+item.getString("FAVORITENAME"));
-                                textView1.setTextColor(Color.WHITE);
-                                favoriteArray.add(item.getString("FAVORITENAME"));
+                                linearLine.addView(blank_1);
+                                linearLine.addView(line);
+                                linearLine.addView(lineNum);
+                                linearLine.addView(blank_2);
 
-                                TextView textView2 = new TextView(this);
-                                textView2.setText("STATIONCODE : "+item.getString("STATIONCODE"));
-                                textView2.setTextColor(Color.WHITE);
-                                codeArray.add(item.getString("STATIONCODE"));
+                                linearLayout.addView(linearLine);
 
-                                TextView textView3 = new TextView(this);
-                                textView3.setText("LINE : "+item.getString("LINE"));
-                                textView3.setTextColor(Color.WHITE);
+                                //역 이름 레이아웃 비율
+                                LinearLayout.LayoutParams paramStation = new LinearLayout.LayoutParams
+                                        (0, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                                TextView textView4 = new TextView(this);
-                                textView4.setText("FCODE : "+item.getString("FCODE"));
-                                textView4.setTextColor(Color.WHITE);
+                                paramStation.weight = 3f;
+
+                                //역 이름 레이아웃
+                                LinearLayout linearStation = new LinearLayout(this);
+                                linearStation.setLayoutParams(paramStation);
+                                linearStation.setOrientation(LinearLayout.VERTICAL);
+                                linearStation.setPadding(5,0,0,0);
+
+                                TextView station = new TextView(this);
+                                station.setText("STATION");
+                                station.setPadding(15, 0, 15, 0);
+
+                                TextView stationName = new TextView(this);
+                                stationName.setText(item.getString("FAVORITENAME"));
+                                stationName.setPadding(15, 0, 15, 0);
+
+                                linearStation.addView(station);
+                                linearStation.addView(stationName);
+
+                                linearLayout.addView(linearStation);
+
+                                //삭제 버튼 레이아웃 비율
+                                LinearLayout.LayoutParams paramDeleteBtn = new LinearLayout.LayoutParams
+                                        (0, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                paramDeleteBtn.weight = 1f;
+
+                                //삭제 버튼 레이아웃
+                                LinearLayout linearDelete = new LinearLayout(this);
+                                linearDelete.setLayoutParams(paramDeleteBtn);
+                                linearDelete.setOrientation(LinearLayout.VERTICAL);
+                                linearDelete.setPadding(0,20,0,0);
 
                                 //버튼 생성 및 삭제
                                 Button button = new Button(this);
@@ -487,6 +548,7 @@ public class FavActivity extends AppCompatActivity{
                                                     sb.append((char) ch);
                                                 }
                                                 in.close();
+                                                Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                                                 onResume();
 
                                             }
@@ -499,11 +561,42 @@ public class FavActivity extends AppCompatActivity{
                                 button.setText("삭제");
                                 btnTagNum++;
 
-                                linearLayout.addView(textView1);
-                                linearLayout.addView(textView2);
-                                linearLayout.addView(textView3);
-                                linearLayout.addView(textView4);
-                                linearLayout.addView(button);
+                                linearDelete.addView(button);
+                                linearLayout.addView(linearDelete);
+
+                                //상행선 하행선 버튼 레이아웃
+                                LinearLayout.LayoutParams paramBottom = new LinearLayout.LayoutParams
+                                        (ViewGroup.LayoutParams.MATCH_PARENT, 60);
+
+                                LinearLayout linearBottomLayout = new LinearLayout(this);
+                                linearBottomLayout.setLayoutParams(paramBottom);
+                                linearBottomLayout.setOrientation(LinearLayout.HORIZONTAL);
+                                linearBottomLayout.setPadding(0,0,0,0);
+
+                                //상행선
+                                Button nobori = new Button(this);
+                                nobori.setText("상행선");
+                                nobori.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                });
+
+                                //하행선
+                                Button kudari = new Button(this);
+                                kudari.setText("하행선");
+                                kudari.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        
+                                    }
+                                });
+
+                                linearBottomLayout.addView(nobori);
+                                linearBottomLayout.addView(kudari);
+
+                                linearStation.addView(linearBottomLayout);
 
                                 favMain.addView(linearLayout);
 
@@ -553,6 +646,4 @@ public class FavActivity extends AppCompatActivity{
         editor.commit();
         Log.d("Preferences클리어","완료");
     }
-
-
 }
