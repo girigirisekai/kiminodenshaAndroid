@@ -1,115 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mtf_cardHeight_final"
+                android:text="KiminoDensha"
+                android:textSize="30dp"
+                android:textStyle="italic"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="@dimen/mtf_cardHeight_final"
+                />
+
+    <EditText
+                android:id="@+id/editId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="E-mail"
+                android:textSize="15dp"
+                android:textStyle="italic"
+                android:layout_marginTop="@dimen/mtf_cardHeight_final"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+
+
+
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textSize="15dp"
+                android:textStyle="italic"
+                android:layout_marginTop="@dimen/mtf_corner_radius"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+
+                />
+
+
+
+            <Spinner
+                android:id="@+id/answerSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@android:color/darker_gray"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="@dimen/mtf_corner_radius"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+
+
+        <EditText
+            android:id="@+id/editAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Secondary Password"
+            android:textSize="15dp"
+            android:textStyle="italic"
+            android:layout_marginTop="@dimen/mtf_corner_radius"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            />
+
+
+        <!--
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID"
+            android:text="인증번호 작성"
+            android:textSize="20dp"
+            android:textStyle="italic"
             />
+    -->
 
         <EditText
-            android:id="@+id/editId"
-            android:hint="ID를 입력하세요"
-            android:layout_width="wrap_content"
+            android:id="@+id/editCheckCode"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="인증번호를 입력하세요"
+            android:textSize="15dp"
+            android:textStyle="italic"
+            android:layout_marginTop="@dimen/mtf_corner_radius"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
 
         <TextView
+            android:id="@+id/timerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:textSize="15dp"
+            android:textStyle="italic"
+            android:layout_marginTop="@dimen/mtf_corner_radius"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="@dimen/mtf_cardHeight_final"
             />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            >
+
+
+            <Button
+                android:id="@+id/checkCode"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="JoinButton"
+                android:text="인증번호 보내기"
+                android:textSize="15dp"
+                android:textStyle="italic"
+
+                />
+
+            <Button
+                android:id="@+id/checkCodeOk"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:onClick="JoinButton"
+                android:text="인증번호 확인"
+                android:textSize="15dp"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/joinButton"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:onClick="JoinButton"
+                android:text="회원가입"
+                android:textSize="15dp"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+
+        <!--  <com.github.florent37.materialtextfield.MaterialTextField
+        android:layout_width="Llayout_height="wrap_content"
+        app:mtf_animationDuration="1000"
+        app:mtf_labelColor="@android:color/holo_red_dark"
+        app:mtf_openKeyboardOnFocus="true">
+        >
 
         <EditText
-            android:id="@+id/editPassword"
-            android:hint="Password를 입력하세요"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:hint="Password"
+            android:textColor="#333"
+            android:textColorHint="#666"
+            android:textSize="15sp" />
 
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Spinner
-            android:id="@+id/answerSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
+    </com.github.florent37.materialtextfield.MaterialTextField>-->
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editAnswer"
-        android:hint="2차 Password를 입력하세요"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="인증번호 작성"
-        />
-
-    <EditText
-        android:id="@+id/editCheckCode"
-        android:hint="인증번호를 입력하세요"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <TextView
-        android:id="@+id/timerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-        <Button
-            android:id="@+id/checkCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="인증번호 보내기"
-            android:onClick="JoinButton"
-            />
-
-        <Button
-            android:id="@+id/checkCodeOk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="인증번호 확인"
-            android:onClick="JoinButton"
-            android:visibility="invisible"
-            />
-
-        <Button
-            android:id="@+id/joinButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="회원가입"
-            android:onClick="JoinButton"
-            android:visibility="invisible"
-            />
-
-
-
-
-    </LinearLayout>
-
-</LinearLayout>
