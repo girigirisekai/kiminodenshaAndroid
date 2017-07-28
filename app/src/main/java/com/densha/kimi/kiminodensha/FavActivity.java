@@ -123,22 +123,6 @@ public class FavActivity extends AppCompatActivity{
                 Log.d("난수","이상함");
         }
 
-        //////////////////////////////////연습용 잠시/////////////////////////////////////
-
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent gintent = new Intent(FavActivity.this, BoxActivity.class);
-                startActivity(gintent);
-            }
-        };
-
-        Log.d("nuri", "nuri");
-        favMain.setOnClickListener(listener);
-
-        ////////////////////////////////////////////////////////////////////////////////
-
         //포켓몬 버튼 터치리스너
         pokemon.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -579,7 +563,9 @@ public class FavActivity extends AppCompatActivity{
                                 nobori.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-
+                                        Intent intent = new Intent(FavActivity.this, CarActivity.class);
+                                        intent.putExtra("num",2002);
+                                        startActivity(intent);
                                     }
                                 });
 
@@ -589,7 +575,9 @@ public class FavActivity extends AppCompatActivity{
                                 kudari.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        
+                                        Intent intent = new Intent(FavActivity.this, CarActivity.class);
+                                        intent.putExtra("num",2003);
+                                        startActivity(intent);
                                     }
                                 });
 
