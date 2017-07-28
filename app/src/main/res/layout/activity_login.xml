@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     >
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mtf_cardHeight_final"
+        android:text="KiminoDensha"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="@dimen/mtf_cardHeight_final"
+        />
+
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
