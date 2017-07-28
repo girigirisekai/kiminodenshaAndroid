@@ -63,6 +63,7 @@ public class JoinMemberActivity extends AppCompatActivity {
         joinButton = (Button)findViewById(R.id.joinButton);
         timerText = (TextView)findViewById(R.id.timerText);
 
+
         adapter = ArrayAdapter.createFromResource(
                 this, R.array.text_pw, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(
