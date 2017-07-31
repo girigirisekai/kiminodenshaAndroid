@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -557,6 +558,8 @@ public class FavActivity extends AppCompatActivity{
                                 linearBottomLayout.setOrientation(LinearLayout.HORIZONTAL);
                                 linearBottomLayout.setPadding(0,0,0,0);
 
+                                GridLayout gridButtomLayout = new GridLayout(this);
+
                                 //상행선
                                 Button nobori = new Button(this);
                                 nobori.setText("상행선");
@@ -581,8 +584,10 @@ public class FavActivity extends AppCompatActivity{
                                     }
                                 });
 
-                                linearBottomLayout.addView(nobori);
-                                linearBottomLayout.addView(kudari);
+                                gridButtomLayout.addView(nobori);
+                                gridButtomLayout.addView(kudari);
+
+                                linearBottomLayout.addView(gridButtomLayout);
 
                                 linearStation.addView(linearBottomLayout);
 
