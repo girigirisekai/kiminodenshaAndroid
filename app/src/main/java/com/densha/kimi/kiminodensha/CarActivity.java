@@ -228,7 +228,6 @@ public class CarActivity extends AppCompatActivity {
                     Log.d("칸 색상 변화","완료");
                     Log.d("칸 클릭 설정","실행");
                     //칸 클릭 설정
-
                     for(int i=0;i<carImageArray.length;i++) {
                         final int j=i;
                         carImageArray[j].setOnTouchListener(new View.OnTouchListener() {
