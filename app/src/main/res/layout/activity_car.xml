@@ -120,63 +120,63 @@
         android:id="@+id/linearLayout7">
 
         <ImageView
-            android:id="@+id/tr1"
+            android:id="@+id/car1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/tr2"
+            android:id="@+id/car2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/tr3"
+            android:id="@+id/car3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/tr4"
+            android:id="@+id/car4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/tr5"
+            android:id="@+id/car5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/tr6"
+            android:id="@+id/car6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/tr7"
+            android:id="@+id/car7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/tr8"
+            android:id="@+id/car8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
             android:layout_weight="1"
             />
         <ImageView
-            android:id="@+id/tr9"
+            android:id="@+id/car9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
@@ -184,7 +184,7 @@
             />
 
         <ImageView
-            android:id="@+id/tr10"
+            android:id="@+id/car10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/trainn"
