@@ -215,13 +215,13 @@ public class CarActivity extends AppCompatActivity {
                         if(congestion>=0&&congestion<=10) {
                             Log.d("칸 색상","변화없음");
                         }else if(congestion>=11&&congestion<=30){
-                            carImageArray[i].setColorFilter(0XFFDBC1);
-                            Log.d("칸 색상","연분홍");
+                            carImageArray[i].setImageResource(R.drawable.trainorangeweak);
+                            Log.d("칸 색상","연주황");
                         }else if(congestion>=31&&congestion<=70){
-                            carImageArray[i].setColorFilter(0XFF88A7);
-                            Log.d("칸 색상","진한 분홍");
+                            carImageArray[i].setImageResource(R.drawable.trainorange);
+                            Log.d("칸 색상","진한 주황");
                         }else if(congestion>=71&&congestion<=100){
-                            carImageArray[i].setColorFilter(0XFF5675);
+                            carImageArray[i].setImageResource(R.drawable.trainred);
                             Log.d("칸 색상","빨간색");
                         }
                     }
