@@ -551,14 +551,14 @@ public class FavActivity extends AppCompatActivity{
 
                                 //상행선 하행선 버튼 레이아웃
                                 LinearLayout.LayoutParams paramBottom = new LinearLayout.LayoutParams
-                                        (ViewGroup.LayoutParams.MATCH_PARENT, 60);
+                                        (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
                                 LinearLayout linearBottomLayout = new LinearLayout(this);
                                 linearBottomLayout.setLayoutParams(paramBottom);
                                 linearBottomLayout.setOrientation(LinearLayout.HORIZONTAL);
-                                linearBottomLayout.setPadding(0,0,0,0);
+                                //linearBottomLayout.setPadding(0,0,0,0);
 
-                                GridLayout gridButtomLayout = new GridLayout(this);
+                                //GridLayout gridButtomLayout = new GridLayout(this);
 
                                 //상행선
                                 Button nobori = new Button(this);
@@ -584,10 +584,10 @@ public class FavActivity extends AppCompatActivity{
                                     }
                                 });
 
-                                gridButtomLayout.addView(nobori);
-                                gridButtomLayout.addView(kudari);
+                                linearBottomLayout.addView(nobori);
+                                linearBottomLayout.addView(kudari);
 
-                                linearBottomLayout.addView(gridButtomLayout);
+                                //linearBottomLayout.addView(gridButtomLayout);
 
                                 linearStation.addView(linearBottomLayout);
 
