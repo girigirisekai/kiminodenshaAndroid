@@ -1,5 +1,4 @@
 package com.densha.kimi.kiminodensha;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -7,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 /**
  * Car
  */
-public class CarActivity extends AppCompatActivity {
+public class CarActivity extends AppCompatActivity{
 
     //변수
     Intent intent;
@@ -46,6 +46,7 @@ public class CarActivity extends AppCompatActivity {
     ImageView[] carImageArray=new ImageView[10];
     String elderlySeats="";
     String[] elderlySeatsArray=new String[10];
+    SwipeRefreshLayout swipeRefreshLayout;
 
     //메소드
     //onCreate
@@ -56,6 +57,19 @@ public class CarActivity extends AppCompatActivity {
 
         // 화면을 가로 고정
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        //pull to Refresh
+        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.carSwiftLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                Log.d("리프레쉬","실행");
+                //차량 혼잡도 로드
+                carCongestionLoad();
+                swipeRefreshLayout.setRefreshing(false);
+                Log.d("리프레쉬","완료");
+            }
+        });
 
         //차량번호 로드
         intent=getIntent();
@@ -103,6 +117,19 @@ public class CarActivity extends AppCompatActivity {
 
         // 화면을 가로 고정
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        //pull to Refresh
+        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.carSwiftLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                Log.d("리프레쉬","실행");
+                //차량 혼잡도 로드
+                carCongestionLoad();
+                swipeRefreshLayout.setRefreshing(false);
+                Log.d("리프레쉬","완료");
+            }
+        });
 
         //차량번호 로드
         intent=getIntent();

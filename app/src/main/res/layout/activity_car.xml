@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/carSwiftLayout">
+
+
 <RelativeLayout android:id="@+id/RelativeLayout01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -311,3 +317,4 @@
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

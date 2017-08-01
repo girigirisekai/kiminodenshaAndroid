@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,8 @@ public class ElderlySeatsActivity extends AppCompatActivity {
     String elderlySeats="";
     static int elderlySeatsLength=12;
     ImageView[] imageViewArray=new ImageView[12];
+    SwipeRefreshLayout swipeRefreshLayout;
+
     //메소드
     //onCreate
     @Override
@@ -31,6 +34,18 @@ public class ElderlySeatsActivity extends AppCompatActivity {
         // 화면을 가로 고정
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        //pull to Refresh
+        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.elderlySeatsSwiftLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                Log.d("리프레쉬","실행");
+                elderlySeatsUpdate();
+                swipeRefreshLayout.setRefreshing(false);
+                Log.d("리프레쉬","완료");
+            }
+        });
+
         //칸번호와 노약자석 정보 로드
         intent=getIntent();
         carNum=intent.getStringExtra("carNum");
@@ -52,21 +67,7 @@ public class ElderlySeatsActivity extends AppCompatActivity {
         imageViewArray[10]=(ImageView)findViewById(R.id.pokemon11);
         imageViewArray[11]=(ImageView)findViewById(R.id.pokemon12);
 
-        //이미지 색 초기화
-        for(int i=0;i<imageViewArray.length;i++){
-            imageViewArray[i].setColorFilter(Color.GRAY);
-
-        }
-
-        //사람 유무로 이미지 색 변경
-        for(int i=0;i<elderlySeatsLength;i++){
-            if(elderlySeats.charAt(i)=='1'){
-                imageViewArray[i].setColorFilter(null);
-            }if(elderlySeats.charAt(i)=='9'){
-                //imageViewArray[i].setColorFilter(null);
-                imageViewArray[i].setVisibility(View.INVISIBLE);
-            }
-        }
+        elderlySeatsUpdate();
     }
 
     @Override
@@ -74,6 +75,21 @@ public class ElderlySeatsActivity extends AppCompatActivity {
         super.onResume();
         setContentView(R.layout.activity_seat);
 
+        // 화면을 가로 고정
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        //pull to Refresh
+        swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.elderlySeatsSwiftLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                Log.d("리프레쉬","실행");
+                elderlySeatsUpdate();
+                swipeRefreshLayout.setRefreshing(false);
+                Log.d("리프레쉬","완료");
+            }
+        });
+
         //칸번호와 노약자석 정보 로드
         intent=getIntent();
         carNum=intent.getStringExtra("carNum");
@@ -95,6 +111,10 @@ public class ElderlySeatsActivity extends AppCompatActivity {
         imageViewArray[10]=(ImageView)findViewById(R.id.pokemon11);
         imageViewArray[11]=(ImageView)findViewById(R.id.pokemon12);
 
+        elderlySeatsUpdate();
+    }
+
+    public void elderlySeatsUpdate(){
         //이미지 색 초기화
         for(int i=0;i<imageViewArray.length;i++){
             imageViewArray[i].setColorFilter(Color.GRAY);
