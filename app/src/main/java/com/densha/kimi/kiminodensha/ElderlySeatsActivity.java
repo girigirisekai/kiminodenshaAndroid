@@ -53,7 +53,8 @@ public class ElderlySeatsActivity extends AppCompatActivity {
 
         //이미지 색 초기화
         for(int i=0;i<imageViewArray.length;i++){
-            imageViewArray[i].setColorFilter(Color.BLACK);
+            imageViewArray[i].setColorFilter(Color.GRAY);
+
         }
 
         //사람 유무로 이미지 색 변경
