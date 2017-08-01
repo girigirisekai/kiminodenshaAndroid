@@ -386,7 +386,7 @@ public class FavActivity extends AppCompatActivity{
                                 blank_1.setBackgroundColor(Color.WHITE);
 
                                 TextView blank_2 = new TextView(this);
-                                blank_2.setTextSize(5);
+                                blank_2.setTextSize(2);
 
                                 TextView line = new TextView(this);
                                 line.setText("호선");
@@ -461,7 +461,7 @@ public class FavActivity extends AppCompatActivity{
                                 stationName.setText(item.getString("FAVORITENAME"));
                                 stationName.setPadding(15, 0, 15, 0);
 
-                                linearStation.addView(station);
+                                //linearStation.addView(station);
                                 linearStation.addView(stationName);
 
                                 linearLayout.addView(linearStation);
@@ -559,6 +559,7 @@ public class FavActivity extends AppCompatActivity{
                                 //linearBottomLayout.setPadding(0,0,0,0);
 
                                 GridLayout gridButtomLayout = new GridLayout(this);
+                                gridButtomLayout.setColumnCount(2);
 
                                 //상행선
                                 Button nobori = new Button(this);
@@ -571,6 +572,8 @@ public class FavActivity extends AppCompatActivity{
                                         startActivity(intent);
                                     }
                                 });
+                                nobori.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+                                nobori.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
 
                                 //하행선
                                 Button kudari = new Button(this);
