@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 /**
@@ -53,13 +54,17 @@ public class ElderlySeatsActivity extends AppCompatActivity {
 
         //이미지 색 초기화
         for(int i=0;i<imageViewArray.length;i++){
-            imageViewArray[i].setColorFilter(Color.BLACK);
+            imageViewArray[i].setColorFilter(Color.GRAY);
+
         }
 
         //사람 유무로 이미지 색 변경
         for(int i=0;i<elderlySeatsLength;i++){
             if(elderlySeats.charAt(i)=='1'){
                 imageViewArray[i].setColorFilter(null);
+            }if(elderlySeats.charAt(i)=='9'){
+                //imageViewArray[i].setColorFilter(null);
+                imageViewArray[i].setVisibility(View.INVISIBLE);
             }
         }
     }
@@ -99,6 +104,9 @@ public class ElderlySeatsActivity extends AppCompatActivity {
         for(int i=0;i<elderlySeatsLength;i++){
             if(elderlySeats.charAt(i)=='1'){
                 imageViewArray[i].setColorFilter(null);
+            }if(elderlySeats.charAt(i)=='9'){
+                //imageViewArray[i].setColorFilter(null);
+                imageViewArray[i].setVisibility(View.INVISIBLE);
             }
         }
     }
