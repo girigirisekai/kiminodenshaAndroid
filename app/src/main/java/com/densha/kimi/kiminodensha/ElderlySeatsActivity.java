@@ -141,6 +141,7 @@ public class ElderlySeatsActivity extends AppCompatActivity {
     }
 
     public void elderlySeatsUpdate(){
+        Log.d("노약자석업데이트","실행");
         //이미지 색 초기화
         for(int i=0;i<imageViewArray.length;i++){
             imageViewArray[i].setColorFilter(Color.GRAY);
@@ -155,6 +156,8 @@ public class ElderlySeatsActivity extends AppCompatActivity {
                 imageViewArray[i].setVisibility(View.INVISIBLE);
             }
         }
+        elderlySeats="";
+        Log.d("노약자석업데이트","완료");
     }
 
     public void elderlySeatsLoad(){
