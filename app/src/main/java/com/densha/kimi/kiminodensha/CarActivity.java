@@ -263,12 +263,9 @@ public class CarActivity extends AppCompatActivity{
                                 Log.d("노약자석", "실행");
                                 //버튼 눌릴 시
                                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                                    String elderlySeatstoElderly=elderlySeatsArray[j];
-                                    String carNum=Integer.toString(j);
+                                    String carNum=Integer.toString(j+1);
                                     intent = new Intent(CarActivity.this, ElderlySeatsActivity.class);
-                                    Log.d("노약자석 데이터",elderlySeatstoElderly);
-                                    Log.d("차량번호",carNum);
-                                    intent.putExtra("elderlySeats",elderlySeatstoElderly);
+                                    intent.putExtra("subwayNum",subwayNum);
                                     intent.putExtra("carNum",carNum);
                                     startActivity(intent);
                                     Log.d("노약자석","완료");
