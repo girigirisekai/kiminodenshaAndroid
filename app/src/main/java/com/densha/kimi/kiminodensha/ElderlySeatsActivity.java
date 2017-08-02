@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -38,6 +39,8 @@ public class ElderlySeatsActivity extends AppCompatActivity {
     String carNum="";
     static int elderlySeatsLength=12;
     ImageView[] imageViewArray=new ImageView[12];
+    TextView txtViewSubwayNum;
+    TextView txtViewCarNum;
     String elderlySeats="";
     String[] elderlySeatsArray=new String[10];
     SwipeRefreshLayout swipeRefreshLayout;
@@ -76,6 +79,18 @@ public class ElderlySeatsActivity extends AppCompatActivity {
         elderlySeatsLoad();
         Log.d("지하철번호",subwayNum);
         Log.d("칸번호",carNum);
+
+        //텍스트뷰 로드
+        Log.d("텍스트뷰로드","실행");
+        txtViewSubwayNum=(TextView)findViewById(R.id.subwayNumElderly);
+        txtViewCarNum=(TextView)findViewById(R.id.carNumElderly);
+        txtViewSubwayNum.setText("열차번호: "+subwayNum);
+        txtViewCarNum.setText("칸번호: "+carNum);
+        txtViewSubwayNum.setTextColor(Color.WHITE);
+        txtViewCarNum.setTextColor(Color.WHITE);
+        Log.d("열차번호텍스트",txtViewSubwayNum.getText().toString());
+        Log.d("칸번호텍스트",txtViewCarNum.getText().toString());
+        Log.d("텍스트뷰로드","완료");
 
         //이미지뷰 로드
         imageViewArray[0]=(ImageView)findViewById(R.id.pokemon1);
@@ -122,6 +137,18 @@ public class ElderlySeatsActivity extends AppCompatActivity {
         elderlySeatsLoad();
         Log.d("지하철번호",subwayNum);
         Log.d("칸번호",carNum);
+
+        //텍스트뷰 로드
+        Log.d("텍스트뷰로드","실행");
+        txtViewSubwayNum=(TextView)findViewById(R.id.subwayNumElderly);
+        txtViewCarNum=(TextView)findViewById(R.id.carNumElderly);
+        txtViewSubwayNum.setText("열차번호: "+subwayNum);
+        txtViewCarNum.setText("칸번호: "+carNum);
+        txtViewSubwayNum.setTextColor(Color.WHITE);
+        txtViewCarNum.setTextColor(Color.WHITE);
+        Log.d("열차번호텍스트",txtViewSubwayNum.getText().toString());
+        Log.d("칸번호텍스트",txtViewCarNum.getText().toString());
+        Log.d("텍스트뷰로드","완료");
 
         //이미지뷰 로드
         imageViewArray[0]=(ImageView)findViewById(R.id.pokemon1);
@@ -173,9 +200,6 @@ public class ElderlySeatsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             Log.d("json", "error");
         }
-        //String형태로 변환
-        subwayNumInfo = json.toString();
-        Log.d("지하철번호데이터", subwayNumInfo);
         //url설정
         try {
             Log.d("ip주소 ", "203.233.196.139");
